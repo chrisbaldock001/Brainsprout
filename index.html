@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Brainsprout 🌿</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
 <style>
   :root {
     --coral: #FF7F6E;
@@ -27,14 +27,14 @@
     --shadow-coral: 0 8px 32px rgba(255,127,110,0.2);
   }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+- { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-font-family: 'Nunito', sans-serif;
-background: var(--bg);
+font-family: ‘Nunito’, sans-serif;
+background: var(–bg);
 min-height: 100vh;
 overflow-x: hidden;
-color: var(--text-dark);
+color: var(–text-dark);
 }
 
 /* ── SCREENS ── */
@@ -62,9 +62,9 @@ justify-content: center;
 padding: 40px 24px;
 }
 
-#start-screen .blob-1 { width: 300px; height: 300px; background: var(--coral-light); opacity: 0.4; top: -80px; right: -60px; }
-#start-screen .blob-2 { width: 250px; height: 250px; background: var(--teal-light); opacity: 0.35; bottom: 40px; left: -80px; }
-#start-screen .blob-3 { width: 180px; height: 180px; background: var(--butter); opacity: 0.5; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+#start-screen .blob-1 { width: 300px; height: 300px; background: var(–coral-light); opacity: 0.4; top: -80px; right: -60px; }
+#start-screen .blob-2 { width: 250px; height: 250px; background: var(–teal-light); opacity: 0.35; bottom: 40px; left: -80px; }
+#start-screen .blob-3 { width: 180px; height: 180px; background: var(–butter); opacity: 0.5; top: 50%; left: 50%; transform: translate(-50%,-50%); }
 
 .start-inner {
 position: relative;
@@ -101,18 +101,17 @@ animation: float 3s ease-in-out infinite;
 }
 
 .app-logo {
-font-family: 'Nunito', sans-serif;
+font-family: ‘Fredoka One’, cursive;
 font-size: 48px;
-color: var(--coral);
+color: var(–coral);
 letter-spacing: -1px;
 margin-bottom: 6px;
 text-align: center;
 line-height: 1;
-font-weight: 900;
 }
 .app-tagline {
 font-size: 15px;
-color: var(--text-light);
+color: var(–text-light);
 font-weight: 600;
 margin-bottom: 36px;
 letter-spacing: 0.5px;
@@ -120,10 +119,10 @@ letter-spacing: 0.5px;
 
 .name-card {
 background: white;
-border-radius: var(--radius);
+border-radius: var(–radius);
 padding: 32px;
 width: 100%;
-box-shadow: var(--shadow);
+box-shadow: var(–shadow);
 display: flex;
 flex-direction: column;
 gap: 16px;
@@ -132,30 +131,30 @@ gap: 16px;
 .name-card label {
 font-size: 18px;
 font-weight: 800;
-color: var(--text-dark);
+color: var(–text-dark);
 }
 
 .name-card input {
-border: 2.5px solid var(--teal-light);
+border: 2.5px solid var(–teal-light);
 border-radius: 14px;
 padding: 14px 18px;
-font-family: 'Nunito', sans-serif;
+font-family: ‘Nunito’, sans-serif;
 font-size: 18px;
 font-weight: 700;
-color: var(--text-dark);
+color: var(–text-dark);
 outline: none;
 transition: border-color 0.2s, box-shadow 0.2s;
-background: var(--teal-pale);
+background: var(–teal-pale);
 }
-.name-card input::placeholder { color: var(--text-light); font-weight: 600; }
+.name-card input::placeholder { color: var(–text-light); font-weight: 600; }
 .name-card input:focus {
-border-color: var(--teal);
+border-color: var(–teal);
 box-shadow: 0 0 0 4px rgba(77,191,184,0.15);
 }
 
 /* ── BUTTONS ── */
 .btn {
-font-family: 'Nunito', sans-serif;
+font-family: ‘Nunito’, sans-serif;
 font-weight: 800;
 font-size: 17px;
 border: none;
@@ -168,14 +167,14 @@ letter-spacing: 0.3px;
 .btn:active { transform: scale(0.96); }
 
 .btn-coral {
-background: var(--coral);
+background: var(–coral);
 color: white;
 box-shadow: 0 6px 20px rgba(255,127,110,0.4);
 }
 .btn-coral:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(255,127,110,0.45); }
 
 .btn-teal {
-background: var(--teal);
+background: var(–teal);
 color: white;
 box-shadow: 0 6px 20px rgba(77,191,184,0.4);
 }
@@ -183,11 +182,11 @@ box-shadow: 0 6px 20px rgba(77,191,184,0.4);
 
 .btn-outline {
 background: white;
-color: var(--text-mid);
+color: var(–text-mid);
 border: 2.5px solid #E0ECEB;
 box-shadow: none;
 }
-.btn-outline:hover { background: var(--teal-pale); border-color: var(--teal-light); }
+.btn-outline:hover { background: var(–teal-pale); border-color: var(–teal-light); }
 
 .btn-full { width: 100%; }
 
@@ -198,8 +197,8 @@ justify-content: center;
 padding: 40px 24px;
 }
 
-#activity-screen .blob-1 { width: 280px; height: 280px; background: var(--teal-light); opacity: 0.35; top: -60px; left: -60px; }
-#activity-screen .blob-2 { width: 200px; height: 200px; background: var(--coral-light); opacity: 0.3; bottom: 60px; right: -50px; }
+#activity-screen .blob-1 { width: 280px; height: 280px; background: var(–teal-light); opacity: 0.35; top: -60px; left: -60px; }
+#activity-screen .blob-2 { width: 200px; height: 200px; background: var(–coral-light); opacity: 0.3; bottom: 60px; right: -50px; }
 
 .activity-inner {
 position: relative;
@@ -213,18 +212,17 @@ gap: 8px;
 }
 
 .greeting {
-font-family: 'Nunito', sans-serif;
+font-family: ‘Fredoka One’, cursive;
 font-size: 32px;
-color: var(--text-dark);
+color: var(–text-dark);
 text-align: center;
 margin-bottom: 8px;
-font-weight: 800;
 }
-.greeting span { color: var(--coral); }
+.greeting span { color: var(–coral); }
 
 .activity-subtitle {
 font-size: 15px;
-color: var(--text-light);
+color: var(–text-light);
 font-weight: 600;
 margin-bottom: 32px;
 }
@@ -239,10 +237,10 @@ width: 100%;
 
 .activity-card {
 background: white;
-border-radius: var(--radius);
+border-radius: var(–radius);
 padding: 28px 32px;
 width: 100%;
-box-shadow: var(--shadow);
+box-shadow: var(–shadow);
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -254,7 +252,7 @@ border: 2.5px solid transparent;
 .activity-card:hover {
 transform: translateY(-3px);
 box-shadow: 0 16px 48px rgba(77,191,184,0.2);
-border-color: var(--teal-light);
+border-color: var(–teal-light);
 }
 
 .activity-card-icon {
@@ -262,15 +260,14 @@ font-size: 44px;
 }
 
 .activity-card-title {
-font-family: 'Nunito', sans-serif;
+font-family: ‘Fredoka One’, cursive;
 font-size: 26px;
-color: var(--teal);
-font-weight: 800;
+color: var(–teal);
 }
 
 .activity-card-desc {
 font-size: 14px;
-color: var(--text-light);
+color: var(–text-light);
 font-weight: 600;
 text-align: center;
 }
@@ -278,8 +275,8 @@ text-align: center;
 .completed-badge {
 font-size: 13px;
 font-weight: 700;
-color: var(--teal);
-background: var(--teal-pale);
+color: var(–teal);
+background: var(–teal-pale);
 padding: 6px 14px;
 border-radius: 50px;
 display: none;
@@ -319,11 +316,11 @@ flex: 1;
 width: 10px;
 height: 10px;
 border-radius: 50%;
-background: var(--teal-light);
+background: var(–teal-light);
 transition: background 0.3s, transform 0.3s;
 }
-.progress-dot.done { background: var(--teal); transform: scale(1.2); }
-.progress-dot.current { background: var(--coral); transform: scale(1.3); box-shadow: 0 0 0 3px var(--coral-pale); }
+.progress-dot.done { background: var(–teal); transform: scale(1.2); }
+.progress-dot.current { background: var(–coral); transform: scale(1.3); box-shadow: 0 0 0 3px var(–coral-pale); }
 
 .timer-wrap {
 display: flex;
@@ -337,13 +334,12 @@ margin-left: 16px;
 }
 
 .timer-num {
-font-family: 'Nunito', sans-serif;
+font-family: ‘Fredoka One’, cursive;
 font-size: 22px;
-color: var(--coral);
+color: var(–coral);
 min-width: 28px;
 text-align: center;
 transition: color 0.3s;
-font-weight: 800;
 }
 .timer-num.urgent { color: #FF4444; animation: pulse 0.5s ease-in-out infinite; }
 @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); } }
@@ -368,7 +364,7 @@ z-index: 1;
 .riddle-num {
 font-size: 13px;
 font-weight: 700;
-color: var(--text-light);
+color: var(–text-light);
 letter-spacing: 1px;
 text-transform: uppercase;
 }
@@ -391,12 +387,11 @@ display: block;
 }
 
 .riddle-text {
-font-family: 'Nunito', sans-serif;
+font-family: ‘Fredoka One’, cursive;
 font-size: 22px;
-color: var(--text-dark);
+color: var(–text-dark);
 line-height: 1.4;
 letter-spacing: -0.3px;
-font-weight: 700;
 }
 
 .riddle-actions {
@@ -407,13 +402,13 @@ width: 100%;
 }
 
 .btn-hint {
-background: var(--butter);
+background: var(–butter);
 color: #8A6A00;
 font-size: 15px;
 padding: 12px 24px;
 border-radius: 50px;
 border: none;
-font-family: 'Nunito', sans-serif;
+font-family: ‘Nunito’, sans-serif;
 font-weight: 800;
 cursor: pointer;
 transition: transform 0.15s, background 0.15s;
@@ -454,16 +449,15 @@ gap: 16px;
 @keyframes slideUp { from { transform: translateY(60px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
 .overlay-title {
-font-family: 'Nunito', sans-serif;
+font-family: ‘Fredoka One’, cursive;
 font-size: 22px;
-color: var(--coral);
-font-weight: 800;
+color: var(–coral);
 }
 
 .overlay-hint {
 font-size: 17px;
 font-weight: 700;
-color: var(--text-dark);
+color: var(–text-dark);
 line-height: 1.5;
 }
 
@@ -511,19 +505,18 @@ gap: 8px;
 @keyframes bounce { 0%,100% { transform: scale(1); } 50% { transform: scale(1.2); } }
 
 .celeb-title {
-font-family: 'Nunito', sans-serif;
+font-family: ‘Fredoka One’, cursive;
 font-size: 40px;
-color: var(--coral);
+color: var(–coral);
 text-align: center;
 line-height: 1.1;
 margin-bottom: 8px;
-font-weight: 900;
 }
 
 .celeb-subtitle {
 font-size: 16px;
 font-weight: 700;
-color: var(--text-mid);
+color: var(–text-mid);
 text-align: center;
 margin-bottom: 32px;
 }
@@ -551,18 +544,181 @@ padding: 60px 24px;
 .loading-spinner {
 width: 48px;
 height: 48px;
-border: 4px solid var(--teal-light);
-border-top-color: var(--teal);
+border: 4px solid var(–teal-light);
+border-top-color: var(–teal);
 border-radius: 50%;
 animation: spin 0.8s linear infinite;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── SNAKE SCREEN ── */
+#snake-screen {
+background: linear-gradient(160deg, #EEFCFB 0%, #FFF8F6 100%);
+justify-content: flex-start;
+padding: 0;
+}
+
+.snake-inner {
+display: flex;
+flex-direction: column;
+align-items: center;
+width: 100%;
+max-width: 480px;
+margin: 0 auto;
+padding: 20px 16px 24px;
+gap: 16px;
+position: relative;
+z-index: 1;
+}
+
+.snake-header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+width: 100%;
+}
+
+.snake-scores {
+display: flex;
+gap: 10px;
+}
+
+.score-box {
+background: white;
+border-radius: 16px;
+padding: 8px 16px;
+text-align: center;
+box-shadow: var(–shadow);
+min-width: 64px;
+position: relative;
+}
+
+.score-box-hi { padding-right: 28px; }
+
+.score-label {
+font-size: 10px;
+font-weight: 800;
+color: var(–text-light);
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+.score-val {
+font-family: ‘Fredoka One’, cursive;
+font-size: 22px;
+color: var(–teal);
+}
+
+.score-box-hi .score-val { color: var(–coral); }
+
+.clear-btn {
+position: absolute;
+top: 4px;
+right: 5px;
+background: none;
+border: none;
+font-size: 10px;
+color: var(–text-light);
+cursor: pointer;
+padding: 2px;
+line-height: 1;
+border-radius: 50%;
+transition: color 0.2s, background 0.2s;
+}
+.clear-btn:hover { color: var(–coral); background: var(–coral-pale); }
+
+.canvas-wrap {
+position: relative;
+border-radius: 20px;
+overflow: hidden;
+box-shadow: 0 12px 48px rgba(77,191,184,0.18), 0 2px 8px rgba(0,0,0,0.06);
+border: 3px solid rgba(77,191,184,0.2);
+width: min(340px, calc(100vw - 32px));
+height: min(340px, calc(100vw - 32px));
+}
+
+#snake-canvas {
+display: block;
+width: 100%;
+height: 100%;
+background: #F0FAF9;
+}
+
+.snake-overlay {
+position: absolute;
+inset: 0;
+background: rgba(238,250,249,0.94);
+display: flex;
+align-items: center;
+justify-content: center;
+backdrop-filter: blur(4px);
+transition: opacity 0.3s;
+}
+.snake-overlay.hidden { display: none; }
+
+.snake-overlay-content {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 8px;
+text-align: center;
+padding: 24px;
+}
+
+.snake-overlay-emoji { font-size: 48px; animation: float 2s ease-in-out infinite; }
+.snake-overlay-title { font-family: ‘Fredoka One’, cursive; font-size: 28px; color: var(–text-dark); }
+.snake-overlay-sub { font-size: 14px; font-weight: 600; color: var(–text-light); margin-bottom: 8px; }
+
+/* D-Pad */
+.dpad {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 4px;
+margin-top: 4px;
+}
+
+.dpad-row {
+display: flex;
+align-items: center;
+gap: 4px;
+}
+
+.dpad-btn {
+width: 60px;
+height: 60px;
+border-radius: 16px;
+background: white;
+border: 2.5px solid var(–teal-light);
+font-size: 20px;
+cursor: pointer;
+box-shadow: 0 4px 12px rgba(77,191,184,0.2);
+transition: transform 0.1s, background 0.1s;
+display: flex;
+align-items: center;
+justify-content: center;
+color: var(–teal);
+font-weight: 900;
+-webkit-tap-highlight-color: transparent;
+user-select: none;
+}
+.dpad-btn:active { transform: scale(0.9); background: var(–teal-pale); }
+
+.dpad-center {
+width: 60px;
+height: 60px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 22px;
+}
 
 /* Responsive */
 @media (max-width: 400px) {
 .app-logo { font-size: 38px; }
 .riddle-text { font-size: 18px; }
 .celeb-title { font-size: 32px; }
+.dpad-btn { width: 52px; height: 52px; }
 }
 </style>
 
@@ -663,6 +819,64 @@ animation: spin 0.8s linear infinite;
   <div class="completed-badge" id="riddles-badge">
     ✅ <span id="rounds-count">1</span> riddle challenge completed
   </div>
+  <div class="activity-card" onclick="goToSnake()" style="margin-top:4px;">
+    <div class="activity-card-icon">🐍</div>
+    <div class="activity-card-title" style="color:var(--coral);">Snake</div>
+    <div class="activity-card-desc">The classic Nokia game. Try not to eat yourself.</div>
+  </div>
+</div>
+```
+
+  </div>
+</div>
+
+<!-- ══════════════ SNAKE SCREEN ══════════════ -->
+
+<div id="snake-screen" class="screen">
+  <div class="blob blob-1" style="background:var(--teal-light);opacity:0.3;width:250px;height:250px;top:-60px;right:-60px;"></div>
+  <div class="blob blob-2" style="background:var(--coral-light);opacity:0.25;width:200px;height:200px;bottom:40px;left:-60px;"></div>
+
+  <div class="snake-inner">
+    <div class="snake-header">
+      <button class="btn btn-outline" style="padding:8px 18px;font-size:13px;" onclick="goToActivity()">← Back</button>
+      <div class="snake-scores">
+        <div class="score-box">
+          <div class="score-label">Score</div>
+          <div class="score-val" id="snake-score">0</div>
+        </div>
+        <div class="score-box score-box-hi">
+          <div class="score-label">Best</div>
+          <div class="score-val" id="snake-hi">0</div>
+          <button class="clear-btn" onclick="clearHighScore()" title="Clear high score">✕</button>
+        </div>
+      </div>
+    </div>
+
+```
+<div class="canvas-wrap">
+  <canvas id="snake-canvas"></canvas>
+  <div class="snake-overlay" id="snake-overlay">
+    <div class="snake-overlay-content">
+      <div class="snake-overlay-emoji" id="overlay-emoji">🐍</div>
+      <div class="snake-overlay-title" id="overlay-title">Snake</div>
+      <div class="snake-overlay-sub" id="overlay-sub">Use arrow keys or buttons below</div>
+      <button class="btn btn-teal" id="overlay-btn" onclick="startSnakeGame()">Play 🎮</button>
+    </div>
+  </div>
+</div>
+
+<div class="dpad">
+  <div class="dpad-row">
+    <button class="dpad-btn" onclick="snakeDir('UP')">▲</button>
+  </div>
+  <div class="dpad-row">
+    <button class="dpad-btn" onclick="snakeDir('LEFT')">◀</button>
+    <div class="dpad-center">🌿</div>
+    <button class="dpad-btn" onclick="snakeDir('RIGHT')">▶</button>
+  </div>
+  <div class="dpad-row">
+    <button class="dpad-btn" onclick="snakeDir('DOWN')">▼</button>
+  </div>
 </div>
 ```
 
@@ -683,7 +897,6 @@ animation: spin 0.8s linear infinite;
   <div class="riddle-body">
     <div class="riddle-num" id="riddle-num">Riddle 1 of 7</div>
     <div class="riddle-card">
-      <span class="riddle-deco" id="riddle-deco">🌿</span>
       <p class="riddle-text" id="riddle-text">Loading riddle...</p>
     </div>
     <div class="riddle-actions">
@@ -900,7 +1113,7 @@ function updateProgress() {
 
 function startTimer() {
   clearInterval(timerInterval);
-  timeLeft = 30;
+  timeLeft = 60;
   updateTimerDisplay();
   timerInterval = setInterval(() => {
     timeLeft--;
@@ -1006,6 +1219,189 @@ function launchConfetti() {
     piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
     piece.style.animationDelay = (Math.random() * 1.5) + 's';
     container.appendChild(piece);
+  }
+}
+
+// ── SNAKE ──
+function goToSnake() {
+  showScreen('snake-screen');
+  setTimeout(() => { initSnakeCanvas(); loadSnakeHiScore(); }, 50);
+}
+
+let snakeGame = null;
+
+function initSnakeCanvas() {
+  const wrap = document.querySelector('.canvas-wrap');
+  const canvas = document.getElementById('snake-canvas');
+  const size = wrap.clientWidth;
+  canvas.width = size;
+  canvas.height = size;
+}
+
+function loadSnakeHiScore() {
+  const hi = localStorage.getItem('brainsprout_snake_hi') || 0;
+  document.getElementById('snake-hi').textContent = hi;
+}
+
+function clearHighScore() {
+  localStorage.removeItem('brainsprout_snake_hi');
+  document.getElementById('snake-hi').textContent = 0;
+}
+
+function startSnakeGame() {
+  document.getElementById('snake-overlay').classList.add('hidden');
+  if (snakeGame) snakeGame.stop();
+  snakeGame = new SnakeGame();
+  snakeGame.start();
+}
+
+function snakeDir(dir) {
+  if (snakeGame) snakeGame.setDir(dir);
+}
+
+document.addEventListener('keydown', e => {
+  const map = { ArrowUp:'UP', ArrowDown:'DOWN', ArrowLeft:'LEFT', ArrowRight:'RIGHT' };
+  if (map[e.key]) { e.preventDefault(); snakeDir(map[e.key]); }
+});
+
+class SnakeGame {
+  constructor() {
+    this.canvas = document.getElementById('snake-canvas');
+    this.ctx = this.canvas.getContext('2d');
+    this.size = this.canvas.width;
+    this.cols = 20;
+    this.cell = this.size / this.cols;
+    this.reset();
+  }
+
+  reset() {
+    this.snake = [{x:10,y:10},{x:9,y:10},{x:8,y:10}];
+    this.dir = 'RIGHT';
+    this.nextDir = 'RIGHT';
+    this.food = this.randomFood();
+    this.score = 0;
+    this.running = false;
+    this.loop = null;
+    this.speed = 150;
+    document.getElementById('snake-score').textContent = 0;
+  }
+
+  randomFood() {
+    let pos;
+    do {
+      pos = { x: Math.floor(Math.random() * this.cols), y: Math.floor(Math.random() * this.cols) };
+    } while (this.snake.some(s => s.x === pos.x && s.y === pos.y));
+    return pos;
+  }
+
+  setDir(d) {
+    const opp = { UP:'DOWN', DOWN:'UP', LEFT:'RIGHT', RIGHT:'LEFT' };
+    if (d !== opp[this.dir]) this.nextDir = d;
+  }
+
+  start() { this.running = true; this.tick(); }
+  stop() { this.running = false; clearTimeout(this.loop); }
+
+  tick() {
+    if (!this.running) return;
+    this.dir = this.nextDir;
+    const head = { ...this.snake[0] };
+    if (this.dir === 'UP') head.y--;
+    if (this.dir === 'DOWN') head.y++;
+    if (this.dir === 'LEFT') head.x--;
+    if (this.dir === 'RIGHT') head.x++;
+
+    if (head.x < 0 || head.x >= this.cols || head.y < 0 || head.y >= this.cols) { this.gameOver(); return; }
+    if (this.snake.some(s => s.x === head.x && s.y === head.y)) { this.gameOver(); return; }
+
+    this.snake.unshift(head);
+    if (head.x === this.food.x && head.y === this.food.y) {
+      this.score += 10;
+      document.getElementById('snake-score').textContent = this.score;
+      this.food = this.randomFood();
+      if (this.speed > 70) this.speed -= 3;
+    } else {
+      this.snake.pop();
+    }
+    this.draw();
+    this.loop = setTimeout(() => this.tick(), this.speed);
+  }
+
+  draw() {
+    const ctx = this.ctx;
+    const c = this.cell;
+    const s = this.size;
+
+    ctx.fillStyle = '#F0FAF9';
+    ctx.fillRect(0, 0, s, s);
+
+    ctx.fillStyle = 'rgba(77,191,184,0.12)';
+    for (let x = 0; x < this.cols; x++) {
+      for (let y = 0; y < this.cols; y++) {
+        ctx.beginPath();
+        ctx.arc(x*c + c/2, y*c + c/2, 1.5, 0, Math.PI*2);
+        ctx.fill();
+      }
+    }
+
+    ctx.shadowColor = 'rgba(255,127,110,0.5)';
+    ctx.shadowBlur = 10;
+    ctx.fillStyle = '#FF7F6E';
+    ctx.beginPath();
+    ctx.arc(this.food.x*c + c/2, this.food.y*c + c/2, c/2 - 2, 0, Math.PI*2);
+    ctx.fill();
+    ctx.shadowBlur = 0;
+
+    this.snake.forEach((seg, i) => {
+      const isHead = i === 0;
+      const ratio = 1 - (i / this.snake.length) * 0.4;
+      ctx.fillStyle = isHead ? '#4DBFB8' : `rgba(77,191,184,${ratio})`;
+      ctx.shadowColor = isHead ? 'rgba(77,191,184,0.4)' : 'transparent';
+      ctx.shadowBlur = isHead ? 8 : 0;
+      const pad = isHead ? 1 : 2;
+      this.roundRect(ctx, seg.x*c+pad, seg.y*c+pad, c-pad*2, c-pad*2, isHead ? 6 : 4);
+      ctx.shadowBlur = 0;
+
+      if (isHead) {
+        const ex = this.dir==='LEFT'?-2:this.dir==='RIGHT'?2:0;
+        const ey = this.dir==='UP'?-2:this.dir==='DOWN'?2:0;
+        ctx.fillStyle='white';
+        ctx.beginPath(); ctx.arc(seg.x*c+c/2-3+ex, seg.y*c+c/2-3+ey, 3, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.arc(seg.x*c+c/2+3+ex, seg.y*c+c/2-3+ey, 3, 0, Math.PI*2); ctx.fill();
+        ctx.fillStyle='#2D3B36';
+        ctx.beginPath(); ctx.arc(seg.x*c+c/2-3+ex, seg.y*c+c/2-3+ey, 1.5, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.arc(seg.x*c+c/2+3+ex, seg.y*c+c/2-3+ey, 1.5, 0, Math.PI*2); ctx.fill();
+      }
+    });
+  }
+
+  roundRect(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x+r, y); ctx.lineTo(x+w-r, y);
+    ctx.quadraticCurveTo(x+w, y, x+w, y+r);
+    ctx.lineTo(x+w, y+h-r);
+    ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+    ctx.lineTo(x+r, y+h);
+    ctx.quadraticCurveTo(x, y+h, x, y+h-r);
+    ctx.lineTo(x, y+r);
+    ctx.quadraticCurveTo(x, y, x+r, y);
+    ctx.closePath(); ctx.fill();
+  }
+
+  gameOver() {
+    this.running = false;
+    const hi = parseInt(localStorage.getItem('brainsprout_snake_hi') || 0);
+    const isNew = this.score > hi;
+    if (isNew) {
+      localStorage.setItem('brainsprout_snake_hi', this.score);
+      document.getElementById('snake-hi').textContent = this.score;
+    }
+    const overlay = document.getElementById('snake-overlay');
+    overlay.classList.remove('hidden');
+    document.getElementById('overlay-emoji').textContent = isNew ? '🏆' : '😵';
+    document.getElementById('overlay-title').textContent = isNew ? 'New Best!' : 'Game Over';
+    document.getElementById('overlay-sub').textContent = `You scored ${this.score}${isNew ? ' — absolute legend' : ''}`;
+    document.getElementById('overlay-btn').textContent = 'Play Again 🔄';
   }
 }
 </script>
