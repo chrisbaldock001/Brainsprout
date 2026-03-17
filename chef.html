@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -7,7 +8,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* ── PAGE ── */
     .page {
       background: linear-gradient(160deg, #FFF8F6 0%, #EEFCFB 60%, #F5F8FF 100%);
       justify-content: flex-start;
@@ -15,620 +15,402 @@
       min-height: 100vh;
     }
 
-    .hidden { display: none !important; }
+```
+.hidden { display: none !important; }
 
-    /* ── TOP BAR ── */
-    .top-bar {
-      width: 100%;
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(255,255,255,0.75);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(77,191,184,0.15);
-      position: sticky;
-      top: 0;
-      z-index: 20;
-    }
+.top-bar {
+  width: 100%;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(77,191,184,0.15);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
 
-    .top-bar-title {
-      font-family: 'Fredoka One', sans-serif;
-      font-size: 20px;
-      color: var(--coral);
-    }
+.top-bar-title {
+  font-family: 'Fredoka One', sans-serif;
+  font-size: 20px;
+  color: var(--coral);
+}
 
-    /* ── SHARED INNER ── */
-    .inner {
-      width: 100%;
-      max-width: 520px;
-      margin: 0 auto;
-      padding: 20px 16px 40px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
+.inner {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 20px 16px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 
-    /* ══════════════════════════════
-       PHASE 1 — PRIORITY
-    ══════════════════════════════ */
-    .phase-title {
-      font-family: 'Fredoka One', sans-serif;
-      font-size: 26px;
-      color: var(--text-dark);
-      text-align: center;
-    }
-    .phase-title span { color: var(--coral); }
+.phase-title {
+  font-family: 'Fredoka One', sans-serif;
+  font-size: 26px;
+  color: var(--text-dark);
+  text-align: center;
+}
+.phase-title span { color: var(--coral); }
 
-    .phase-sub {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--text-light);
-      text-align: center;
-      margin-top: -8px;
-    }
+.phase-sub {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-light);
+  text-align: center;
+  margin-top: -8px;
+}
 
-    /* Judge character */
-    .judge-row {
-      display: flex;
-      justify-content: center;
-      margin: 4px 0;
-    }
+.judge-row {
+  display: flex;
+  justify-content: center;
+  margin: 4px 0;
+}
 
-    /* Priority list */
-    .priority-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+/* ── PHASE 1 ── */
+.instruction-card {
+  background: var(--teal-pale);
+  border: 2px solid var(--teal-light);
+  border-radius: 16px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.instruction-icon { font-size: 28px; flex-shrink: 0; }
+.instruction-text { font-size: 13px; font-weight: 700; color: var(--text-mid); line-height: 1.5; }
+.instruction-text strong { color: var(--coral); }
 
-    .priority-item {
-      background: white;
-      border-radius: 18px;
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      box-shadow: var(--shadow);
-      cursor: grab;
-      border: 2.5px solid transparent;
-      transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
-      user-select: none;
-      touch-action: none;
-    }
-    .priority-item:active { cursor: grabbing; }
-    .priority-item.dragging {
-      opacity: 0.5;
-      border-color: var(--teal-light);
-    }
-    .priority-item.drag-over {
-      border-color: var(--coral);
-      box-shadow: 0 0 0 3px var(--coral-pale);
-    }
+.priority-list { display: flex; flex-direction: column; gap: 10px; }
 
-    .priority-rank {
-      font-family: 'Fredoka One', sans-serif;
-      font-size: 22px;
-      color: var(--coral);
-      min-width: 28px;
-      text-align: center;
-    }
+.priority-item {
+  background: white;
+  border-radius: 18px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: var(--shadow);
+  border: 2.5px solid transparent;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+  user-select: none;
+  touch-action: none;
+}
+.priority-item.dragging { opacity: 0.45; border-color: var(--teal-light); transform: scale(1.02); }
+.priority-item.drag-over { border-color: var(--coral); box-shadow: 0 0 0 3px var(--coral-pale); }
 
-    .priority-dish-icon {
-      font-size: 32px;
-    }
+.priority-rank {
+  font-family: 'Fredoka One', sans-serif;
+  font-size: 20px;
+  color: var(--coral);
+  min-width: 26px;
+  text-align: center;
+}
 
-    .priority-info {
-      flex: 1;
-    }
+.priority-dish-icon { font-size: 30px; }
 
-    .priority-dish-name {
-      font-family: 'Fredoka One', sans-serif;
-      font-size: 17px;
-      color: var(--text-dark);
-    }
+.priority-info { flex: 1; min-width: 0; }
 
-    .priority-dish-desc {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-light);
-    }
+.priority-dish-name {
+  font-family: 'Fredoka One', sans-serif;
+  font-size: 16px;
+  color: var(--text-dark);
+}
 
-    .drag-handle {
-      font-size: 18px;
-      color: var(--teal-light);
-      padding: 4px;
-    }
+.priority-dish-desc { font-size: 11px; font-weight: 600; color: var(--text-light); }
 
-    /* ══════════════════════════════
-       PHASE 2 — COOKING
-    ══════════════════════════════ */
-    .timer-banner {
-      background: white;
-      border-radius: 20px;
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: var(--shadow);
-    }
+.priority-arrows { display: flex; flex-direction: column; gap: 3px; }
 
-    .timer-label {
-      font-size: 13px;
-      font-weight: 800;
-      color: var(--text-light);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
+.arrow-btn {
+  width: 32px;
+  height: 27px;
+  border-radius: 8px;
+  border: 2px solid var(--teal-light);
+  background: white;
+  color: var(--teal);
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s, border-color 0.12s, transform 0.1s;
+}
+.arrow-btn:hover { background: var(--teal-pale); border-color: var(--teal); }
+.arrow-btn:active { transform: scale(0.88); }
+.arrow-btn:disabled { opacity: 0.2; cursor: default; }
 
-    .timer-val {
-      font-family: 'Fredoka One', sans-serif;
-      font-size: 36px;
-      color: var(--teal);
-      transition: color 0.3s;
-    }
-    .timer-val.urgent { color: var(--coral); animation: pulse 0.5s ease-in-out infinite; }
+/* ── PHASE 2 ── */
+.timer-banner {
+  background: white;
+  border-radius: 20px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow);
+}
 
-    .timer-bar-wrap {
-      flex: 1;
-      margin: 0 16px;
-      height: 8px;
-      background: var(--teal-pale);
-      border-radius: 50px;
-      overflow: hidden;
-    }
+.timer-label { font-size: 13px; font-weight: 800; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; }
 
-    .timer-bar {
-      height: 100%;
-      background: var(--teal);
-      border-radius: 50px;
-      transition: width 1s linear, background 0.3s;
-    }
-    .timer-bar.urgent { background: var(--coral); }
+.timer-val {
+  font-family: 'Fredoka One', sans-serif;
+  font-size: 36px;
+  color: var(--teal);
+  transition: color 0.3s;
+}
+.timer-val.urgent { color: var(--coral); animation: pulse 0.5s ease-in-out infinite; }
 
-    /* Chef cards */
-    .chef-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+.timer-bar-wrap { flex: 1; margin: 0 16px; height: 8px; background: var(--teal-pale); border-radius: 50px; overflow: hidden; }
+.timer-bar { height: 100%; background: var(--teal); border-radius: 50px; transition: width 1s linear, background 0.3s; }
+.timer-bar.urgent { background: var(--coral); }
 
-    .chef-card {
-      background: white;
-      border-radius: 20px;
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      box-shadow: var(--shadow);
-      border: 2.5px solid transparent;
-      transition: border-color 0.3s;
-      position: relative;
-    }
-    .chef-card.tasted-good { border-color: #6FCF97; }
-    .chef-card.tasted-medium { border-color: var(--butter); }
-    .chef-card.tasted-bad { border-color: var(--coral); }
+.chef-grid { display: flex; flex-direction: column; gap: 12px; }
 
-    .chef-avatar {
-      width: 56px;
-      height: 56px;
-      flex-shrink: 0;
-      position: relative;
-    }
+.chef-card {
+  background: white;
+  border-radius: 20px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: var(--shadow);
+  border: 2.5px solid transparent;
+  transition: border-color 0.3s;
+  overflow: visible;
+  position: relative;
+}
+.chef-card.tasted-good   { border-color: #6FCF97; }
+.chef-card.tasted-medium { border-color: var(--butter); }
+.chef-card.tasted-bad    { border-color: var(--coral); }
 
-    .chef-name {
-      font-family: 'Fredoka One', sans-serif;
-      font-size: 15px;
-      color: var(--text-dark);
-    }
+/* Avatar with scale-pop animation */
+.chef-avatar-wrap {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  transform-origin: center bottom;
+  z-index: 5;
+  position: relative;
+}
+@keyframes avatarPop {
+  0%   { transform: scale(2); }
+  12%  { transform: scale(2.15); }
+  100% { transform: scale(1); }
+}
+.chef-avatar-wrap.popping {
+  animation: avatarPop 4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
 
-    .chef-dish-label {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text-light);
-    }
+.chef-info { flex: 1; min-width: 0; }
+.chef-name { font-family: 'Fredoka One', sans-serif; font-size: 14px; color: var(--text-dark); }
+.chef-dish-label { font-size: 11px; font-weight: 700; color: var(--text-light); }
 
-    .chef-info { flex: 1; min-width: 0; }
+.cook-progress-wrap { height: 5px; background: var(--teal-pale); border-radius: 50px; overflow: hidden; margin-top: 4px; }
+.cook-progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--teal), var(--mint)); border-radius: 50px; transition: width 1s linear; }
+.cook-progress-bar.done { background: linear-gradient(90deg, #6FCF97, var(--mint)); }
 
-    /* Cook progress */
-    .cook-progress-wrap {
-      height: 6px;
-      background: var(--teal-pale);
-      border-radius: 50px;
-      overflow: hidden;
-      margin-top: 6px;
-    }
+/* Yummy meter */
+.yummy-wrap { margin-top: 5px; display: flex; align-items: center; gap: 5px; }
+.yummy-label { font-size: 10px; font-weight: 800; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+.yummy-bar-outer { flex: 1; height: 8px; background: var(--coral-pale); border-radius: 50px; overflow: hidden; }
+.yummy-bar-inner { height: 100%; width: 50%; border-radius: 50px; background: linear-gradient(90deg, #FF7F6E 0%, #FFE8A3 50%, #6FCF97 100%); transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.yummy-emoji { font-size: 14px; }
 
-    .cook-progress-bar {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--teal), var(--mint));
-      border-radius: 50px;
-      transition: width 1s linear;
-    }
-    .cook-progress-bar.done { background: linear-gradient(90deg, #6FCF97, var(--mint)); width: 100%; }
+.last-taste { font-size: 10px; font-weight: 800; margin-top: 3px; }
+.last-taste.good   { color: #27AE60; }
+.last-taste.medium { color: #C49A00; }
+.last-taste.bad    { color: var(--coral); }
 
-    /* Taste feedback badge */
-    .taste-badge {
-      font-size: 12px;
-      font-weight: 800;
-      padding: 4px 10px;
-      border-radius: 50px;
-      display: none;
-    }
-    .taste-badge.show { display: inline-block; }
-    .taste-badge.good { background: #D4F5E2; color: #27AE60; }
-    .taste-badge.medium { background: var(--butter); color: #8A6A00; }
-    .taste-badge.bad { background: var(--coral-pale); color: var(--coral); }
+.taste-btn {
+  font-family: 'Nunito', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 5px 10px;
+  border-radius: 50px;
+  border: 2px solid var(--teal-light);
+  background: white;
+  color: var(--teal);
+  cursor: pointer;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.taste-btn:hover { background: var(--teal-pale); }
+.taste-btn:disabled { opacity: 0.35; cursor: default; }
 
-    /* Taste button */
-    .taste-btn {
-      font-family: 'Nunito', sans-serif;
-      font-size: 12px;
-      font-weight: 800;
-      padding: 6px 12px;
-      border-radius: 50px;
-      border: 2px solid var(--teal-light);
-      background: white;
-      color: var(--teal);
-      cursor: pointer;
-      transition: background 0.15s, border-color 0.15s;
-      flex-shrink: 0;
-    }
-    .taste-btn:hover { background: var(--teal-pale); }
-    .taste-btn:disabled { opacity: 0.4; cursor: default; }
+.dish-thumb {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  cursor: pointer;
+  border-radius: 12px;
+  background: var(--teal-pale);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  transition: transform 0.15s, box-shadow 0.15s;
+  border: 2px solid transparent;
+}
+.dish-thumb:hover { transform: scale(1.1); box-shadow: var(--shadow); }
+.dish-thumb.cooking { opacity: 0.3; cursor: default; filter: grayscale(1); }
+.dish-thumb.ready { border-color: var(--teal-light); animation: bounce 0.4s ease; }
 
-    /* Dish thumbnail */
-    .dish-thumb {
-      width: 48px;
-      height: 48px;
-      flex-shrink: 0;
-      cursor: pointer;
-      border-radius: 12px;
-      background: var(--teal-pale);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      transition: transform 0.15s, box-shadow 0.15s;
-      border: 2px solid transparent;
-    }
-    .dish-thumb:hover { transform: scale(1.1); box-shadow: var(--shadow); }
-    .dish-thumb.cooking { opacity: 0.35; cursor: default; }
-    .dish-thumb.ready { border-color: var(--teal-light); animation: bounce 0.4s ease; }
+/* ── PHASE 3 ── */
+.rating-intro { text-align: center; padding: 4px 0; }
+.rating-intro p { font-size: 14px; font-weight: 700; color: var(--text-light); margin-top: 4px; }
 
-    /* ══════════════════════════════
-       PHASE 3 — RATING
-    ══════════════════════════════ */
-    .rating-intro {
-      text-align: center;
-      padding: 8px 0;
-    }
+.rating-card { background: white; border-radius: 20px; padding: 14px 16px; display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow); }
+.rating-dish-icon { font-size: 34px; flex-shrink: 0; }
+.rating-info { flex: 1; }
+.rating-chef-name { font-family: 'Fredoka One', sans-serif; font-size: 15px; color: var(--text-dark); }
+.rating-dish-name { font-size: 12px; font-weight: 700; color: var(--text-light); }
+.star-row { display: flex; gap: 4px; margin-top: 4px; }
+.star { font-size: 22px; cursor: pointer; transition: transform 0.1s; filter: grayscale(1); opacity: 0.35; }
+.star.lit { filter: none; opacity: 1; }
+.star:hover { transform: scale(1.25); }
 
-    .rating-intro p {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--text-light);
-      margin-top: 4px;
-    }
+/* ── PHASE 4 ── */
+.results-header { text-align: center; }
+.results-list { display: flex; flex-direction: column; gap: 10px; }
 
-    .rating-card {
-      background: white;
-      border-radius: 20px;
-      padding: 16px;
-      box-shadow: var(--shadow);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+.result-card {
+  background: white; border-radius: 18px; padding: 12px 14px;
+  display: flex; align-items: center; gap: 10px;
+  box-shadow: var(--shadow); border-left: 5px solid var(--teal-light);
+  animation: slideUp 0.3s ease both;
+}
+.result-card:nth-child(1) { animation-delay:.05s; border-left-color:#FFD700; }
+.result-card:nth-child(2) { animation-delay:.10s; border-left-color:#C0C0C0; }
+.result-card:nth-child(3) { animation-delay:.15s; border-left-color:#CD7F32; }
+.result-card:nth-child(4) { animation-delay:.20s; }
+.result-card:nth-child(5) { animation-delay:.25s; }
 
-    .rating-dish-icon { font-size: 36px; flex-shrink: 0; }
+.result-rank { font-family:'Fredoka One',sans-serif; font-size:20px; color:var(--text-light); min-width:30px; text-align:center; }
+.result-card:nth-child(1) .result-rank { color:#FFD700; }
+.result-card:nth-child(2) .result-rank { color:#888; }
+.result-card:nth-child(3) .result-rank { color:#CD7F32; }
 
-    .rating-info { flex: 1; }
+.result-dish { font-size: 28px; }
+.result-info { flex: 1; min-width: 0; }
+.result-chef-name { font-family:'Fredoka One',sans-serif; font-size:14px; color:var(--text-dark); }
+.result-stars { font-size:13px; letter-spacing:1px; }
+.prediction-badge { font-size:11px; font-weight:800; padding:2px 8px; border-radius:50px; }
+.prediction-badge.match { background:#D4F5E2; color:#27AE60; }
+.prediction-badge.close { background:var(--butter); color:#8A6A00; }
+.prediction-badge.miss  { background:var(--coral-pale); color:var(--coral); }
+.result-taste-note { font-size:11px; font-weight:700; color:var(--text-light); margin-top:2px; }
 
-    .rating-chef-name {
-      font-family: 'Fredoka One', sans-serif;
-      font-size: 15px;
-      color: var(--text-dark);
-    }
+/* ── MODALS ── */
+.dish-modal, .taste-modal {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(45,59,54,0.55);
+  backdrop-filter: blur(6px);
+  z-index: 200;
+  justify-content: center;
+  padding: 24px;
+}
+.dish-modal { align-items: center; }
+.taste-modal { align-items: flex-end; }
+.dish-modal.show, .taste-modal.show { display: flex; animation: fadeIn 0.2s ease; }
 
-    .rating-dish-name {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text-light);
-    }
+.dish-modal-card {
+  background: white; border-radius: 28px; padding: 32px 28px;
+  max-width: 300px; width: 100%; text-align: center;
+  animation: slideUp 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.dish-modal-icon { font-size: 80px; animation: bounce 0.5s ease; }
+.dish-modal-name { font-family:'Fredoka One',sans-serif; font-size:22px; color:var(--text-dark); }
+.dish-modal-chef { font-size:13px; font-weight:700; color:var(--text-light); }
+.dish-modal-status { font-size:13px; font-weight:800; padding:6px 16px; border-radius:50px; }
 
-    .star-row {
-      display: flex;
-      gap: 4px;
-    }
+.taste-modal-card {
+  background: white; border-radius: 28px; padding: 26px;
+  max-width: 400px; width: 100%;
+  animation: slideUp 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  display: flex; flex-direction: column; gap: 12px;
+}
+.taste-modal-title { font-family:'Fredoka One',sans-serif; font-size:19px; color:var(--text-dark); text-align:center; }
 
-    .star {
-      font-size: 24px;
-      cursor: pointer;
-      transition: transform 0.1s;
-      filter: grayscale(1);
-      opacity: 0.4;
-    }
-    .star.lit { filter: none; opacity: 1; }
-    .star:hover { transform: scale(1.2); }
+.taste-options { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.taste-option {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 14px 8px; border-radius: 16px; border: 2.5px solid #E0ECEB;
+  background: white; cursor: pointer;
+  transition: all 0.15s;
+  font-family:'Nunito',sans-serif; font-weight:800; font-size:13px; color:var(--text-mid);
+}
+.taste-option:hover { transform: translateY(-2px); }
+.taste-option.opt-good:hover   { border-color:#6FCF97; background:#D4F5E2; color:#27AE60; }
+.taste-option.opt-medium:hover { border-color:#F2C94C; background:var(--butter); color:#8A6A00; }
+.taste-option.opt-bad:hover    { border-color:var(--coral); background:var(--coral-pale); color:var(--coral); }
+.taste-option-emoji { font-size: 28px; }
 
-    /* ══════════════════════════════
-       PHASE 4 — RESULTS
-    ══════════════════════════════ */
-    .results-header {
-      text-align: center;
-    }
+.reset-btn {
+  position: fixed; top: 16px; right: 16px;
+  background: white; border: 2px solid #E0ECEB; border-radius: 50px;
+  padding: 8px 14px; font-family:'Nunito',sans-serif; font-size:13px; font-weight:800;
+  color: var(--text-light); cursor: pointer; z-index: 10;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.reset-btn:hover { color:var(--coral); border-color:var(--coral-light); background:var(--coral-pale); }
 
-    .results-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+@media (max-width: 400px) {
+  .chef-card { padding: 10px 10px; gap: 7px; }
+  .chef-avatar-wrap { width: 46px; height: 46px; }
+  .arrow-btn { width: 28px; height: 24px; font-size: 11px; }
+}
+```
 
-    .result-card {
-      background: white;
-      border-radius: 18px;
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      box-shadow: var(--shadow);
-      border-left: 5px solid var(--teal-light);
-      animation: slideUp 0.3s ease both;
-    }
-    .result-card:nth-child(1) { animation-delay: 0.05s; border-left-color: #FFD700; }
-    .result-card:nth-child(2) { animation-delay: 0.1s;  border-left-color: #C0C0C0; }
-    .result-card:nth-child(3) { animation-delay: 0.15s; border-left-color: #CD7F32; }
-    .result-card:nth-child(4) { animation-delay: 0.2s; }
-    .result-card:nth-child(5) { animation-delay: 0.25s; }
-
-    .result-rank {
-      font-family: 'Fredoka One', sans-serif;
-      font-size: 22px;
-      color: var(--text-light);
-      min-width: 32px;
-      text-align: center;
-    }
-    .result-card:nth-child(1) .result-rank { color: #FFD700; }
-    .result-card:nth-child(2) .result-rank { color: #888; }
-    .result-card:nth-child(3) .result-rank { color: #CD7F32; }
-
-    .result-dish { font-size: 30px; }
-
-    .result-info { flex: 1; }
-
-    .result-chef-name {
-      font-family: 'Fredoka One', sans-serif;
-      font-size: 15px;
-      color: var(--text-dark);
-    }
-
-    .result-stars {
-      font-size: 14px;
-      letter-spacing: 2px;
-    }
-
-    .prediction-badge {
-      font-size: 11px;
-      font-weight: 800;
-      padding: 3px 8px;
-      border-radius: 50px;
-    }
-    .prediction-badge.match { background: #D4F5E2; color: #27AE60; }
-    .prediction-badge.close { background: var(--butter); color: #8A6A00; }
-    .prediction-badge.miss  { background: var(--coral-pale); color: var(--coral); }
-
-    .result-taste-note {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text-light);
-      margin-top: 2px;
-    }
-
-    /* ══════════════════════════════
-       DISH MODAL
-    ══════════════════════════════ */
-    .dish-modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(45,59,54,0.55);
-      backdrop-filter: blur(6px);
-      z-index: 200;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
-    .dish-modal.show { display: flex; animation: fadeIn 0.2s ease; }
-
-    .dish-modal-card {
-      background: white;
-      border-radius: 28px;
-      padding: 32px 28px;
-      max-width: 320px;
-      width: 100%;
-      text-align: center;
-      animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .dish-modal-icon { font-size: 80px; animation: bounce 0.5s ease; }
-
-    .dish-modal-name {
-      font-family: 'Fredoka One', sans-serif;
-      font-size: 24px;
-      color: var(--text-dark);
-    }
-
-    .dish-modal-chef {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--text-light);
-    }
-
-    .dish-modal-status {
-      font-size: 13px;
-      font-weight: 800;
-      padding: 6px 16px;
-      border-radius: 50px;
-      background: var(--teal-pale);
-      color: var(--teal);
-    }
-
-    /* ══════════════════════════════
-       TASTE MODAL
-    ══════════════════════════════ */
-    .taste-modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(45,59,54,0.55);
-      backdrop-filter: blur(6px);
-      z-index: 200;
-      align-items: flex-end;
-      justify-content: center;
-      padding: 24px;
-    }
-    .taste-modal.show { display: flex; animation: fadeIn 0.2s ease; }
-
-    .taste-modal-card {
-      background: white;
-      border-radius: 28px;
-      padding: 28px;
-      max-width: 400px;
-      width: 100%;
-      animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .taste-modal-title {
-      font-family: 'Fredoka One', sans-serif;
-      font-size: 20px;
-      color: var(--text-dark);
-      text-align: center;
-    }
-
-    .taste-options {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-
-    .taste-option {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      padding: 14px 8px;
-      border-radius: 16px;
-      border: 2.5px solid #E0ECEB;
-      background: white;
-      cursor: pointer;
-      transition: all 0.15s;
-      font-family: 'Nunito', sans-serif;
-      font-weight: 800;
-      font-size: 13px;
-      color: var(--text-mid);
-    }
-    .taste-option:hover { transform: translateY(-2px); }
-    .taste-option.opt-good:hover  { border-color: #6FCF97; background: #D4F5E2; color: #27AE60; }
-    .taste-option.opt-medium:hover { border-color: #F2C94C; background: var(--butter); color: #8A6A00; }
-    .taste-option.opt-bad:hover   { border-color: var(--coral); background: var(--coral-pale); color: var(--coral); }
-    .taste-option-emoji { font-size: 28px; }
-
-    /* ══════════════════════════════
-       RESET BUTTON
-    ══════════════════════════════ */
-    .reset-btn {
-      position: fixed;
-      top: 16px;
-      right: 16px;
-      background: white;
-      border: 2px solid #E0ECEB;
-      border-radius: 50px;
-      padding: 8px 14px;
-      font-family: 'Nunito', sans-serif;
-      font-size: 13px;
-      font-weight: 800;
-      color: var(--text-light);
-      cursor: pointer;
-      z-index: 10;
-      transition: color 0.2s, border-color 0.2s, background 0.2s;
-    }
-    .reset-btn:hover { color: var(--coral); border-color: var(--coral-light); background: var(--coral-pale); }
-
-    @media (max-width: 400px) {
-      .chef-card { padding: 10px 12px; gap: 8px; }
-      .chef-avatar { width: 46px; height: 46px; }
-      .taste-options { gap: 6px; }
-    }
   </style>
 </head>
 <body>
 
-  <!-- ══ TOP BAR ══ -->
   <div class="top-bar">
     <a href="activities.html" class="btn btn-outline" style="padding:8px 18px;font-size:13px;">← Back</a>
     <span class="top-bar-title">👨‍🍳 Chef Judge</span>
     <div style="width:80px;"></div>
   </div>
 
-  <!-- ══════════════════════════════
-       PHASE 1 — SET PRIORITIES
-  ══════════════════════════════ -->
+  <!-- PHASE 1 — PRIORITY -->
+
   <div id="phase-priority">
     <div class="inner">
       <div class="judge-row">
-        <!-- Wise Owl Judge SVG -->
-        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" style="animation: float 3s ease-in-out infinite;">
-          <!-- Body -->
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" style="animation:float 3s ease-in-out infinite;">
           <ellipse cx="40" cy="50" rx="22" ry="24" fill="#FFE8A3"/>
           <ellipse cx="40" cy="50" rx="22" ry="24" fill="#FFDAB3" opacity="0.6"/>
-          <!-- Chef hat -->
           <rect x="26" y="18" width="28" height="8" rx="4" fill="white" stroke="#E0E0E0" stroke-width="1.5"/>
           <rect x="30" y="8" width="20" height="14" rx="6" fill="white" stroke="#E0E0E0" stroke-width="1.5"/>
-          <!-- Wings -->
           <ellipse cx="18" cy="52" rx="8" ry="14" fill="#FFD580" transform="rotate(-15 18 52)"/>
           <ellipse cx="62" cy="52" rx="8" ry="14" fill="#FFD580" transform="rotate(15 62 52)"/>
-          <!-- Face -->
-          <circle cx="33" cy="44" r="7" fill="white"/>
-          <circle cx="47" cy="44" r="7" fill="white"/>
-          <circle cx="34" cy="44" r="4" fill="#2D3B36"/>
-          <circle cx="48" cy="44" r="4" fill="#2D3B36"/>
-          <circle cx="35" cy="43" r="1.5" fill="white"/>
-          <circle cx="49" cy="43" r="1.5" fill="white"/>
-          <!-- Beak -->
+          <circle cx="33" cy="44" r="7" fill="white"/><circle cx="47" cy="44" r="7" fill="white"/>
+          <circle cx="34" cy="44" r="4" fill="#2D3B36"/><circle cx="48" cy="44" r="4" fill="#2D3B36"/>
+          <circle cx="35" cy="43" r="1.5" fill="white"/><circle cx="49" cy="43" r="1.5" fill="white"/>
           <path d="M37 50 L40 55 L43 50 Z" fill="#FF9F43"/>
-          <!-- Belly -->
           <ellipse cx="40" cy="60" rx="12" ry="10" fill="white" opacity="0.5"/>
-          <!-- Monocle -->
           <circle cx="47" cy="44" r="8" stroke="#C0A020" stroke-width="1.5" fill="none"/>
           <line x1="53" y1="46" x2="56" y2="50" stroke="#C0A020" stroke-width="1.5"/>
         </svg>
       </div>
-
-      <div class="phase-title">Set Your Priorities</div>
-      <div class="phase-sub">Drag to rank the dishes before cooking begins</div>
-
-      <div class="priority-list" id="priority-list">
-        <!-- Populated by JS -->
+      <div class="phase-title">What Sounds <span>Tasty?</span></div>
+      <div class="instruction-card">
+        <div class="instruction-icon">🤤</div>
+        <div class="instruction-text">
+          <strong>Rank the dishes from most to least delicious</strong> — based purely on what sounds good to you! Use the <strong>▲ ▼ arrows</strong> to reorder, or drag. Your guesses get compared to the final scores!
+        </div>
       </div>
-
-      <button class="btn btn-coral btn-full" onclick="startCooking()" style="margin-top:8px;">
-        Start Cooking! 🔥
-      </button>
+      <div class="priority-list" id="priority-list"></div>
+      <button class="btn btn-coral btn-full" onclick="startCooking()" style="margin-top:4px;">Start Cooking! 🔥</button>
     </div>
   </div>
 
-  <!-- ══════════════════════════════
-       PHASE 2 — COOKING
-  ══════════════════════════════ -->
+  <!-- PHASE 2 — COOKING -->
+
   <div id="phase-cooking" class="hidden">
     <div class="inner">
       <div class="timer-banner">
@@ -636,41 +418,30 @@
           <div class="timer-label">Time Left</div>
           <div class="timer-val" id="cook-timer">60</div>
         </div>
-        <div class="timer-bar-wrap">
-          <div class="timer-bar" id="timer-bar" style="width:100%"></div>
-        </div>
+        <div class="timer-bar-wrap"><div class="timer-bar" id="timer-bar" style="width:100%"></div></div>
         <div style="font-size:28px;">⏱️</div>
       </div>
-
-      <div class="chef-grid" id="chef-grid">
-        <!-- Populated by JS -->
-      </div>
+      <div class="chef-grid" id="chef-grid"></div>
     </div>
   </div>
 
-  <!-- ══════════════════════════════
-       PHASE 3 — RATE DISHES
-  ══════════════════════════════ -->
+  <!-- PHASE 3 — RATE -->
+
   <div id="phase-rating" class="hidden">
     <div class="inner">
       <div class="rating-intro">
         <div class="phase-title">Rate the <span>Dishes!</span></div>
         <p>Tap the stars to score each chef's creation</p>
       </div>
-
-      <div id="rating-list">
-        <!-- Populated by JS -->
-      </div>
-
-      <button class="btn btn-coral btn-full" id="rating-submit-btn" onclick="submitRatings()" disabled style="margin-top:8px; opacity:0.5;">
+      <div id="rating-list"></div>
+      <button class="btn btn-coral btn-full" id="rating-submit-btn" onclick="submitRatings()" disabled style="margin-top:8px;opacity:0.5;">
         See Final Results 🏆
       </button>
     </div>
   </div>
 
-  <!-- ══════════════════════════════
-       PHASE 4 — RESULTS
-  ══════════════════════════════ -->
+  <!-- PHASE 4 — RESULTS -->
+
   <div id="phase-results" class="hidden">
     <div class="confetti-container" id="confetti-container"></div>
     <div class="inner">
@@ -678,226 +449,229 @@
         <div class="phase-title">🏆 Final <span>Results</span></div>
         <div class="phase-sub" id="results-summary"></div>
       </div>
-
-      <div class="results-list" id="results-list">
-        <!-- Populated by JS -->
-      </div>
-
-      <button class="btn btn-coral btn-full" onclick="restartGame()" style="margin-top:8px;">
-        Play Again 🔄
-      </button>
-      <a href="activities.html" class="btn btn-outline btn-full" style="margin-top:4px;">
-        Choose Activity 🏠
-      </a>
+      <div class="results-list" id="results-list"></div>
+      <button class="btn btn-coral btn-full" onclick="restartGame()" style="margin-top:8px;">Play Again 🔄</button>
+      <a href="activities.html" class="btn btn-outline btn-full" style="margin-top:4px;">Choose Activity 🏠</a>
     </div>
   </div>
 
-  <!-- ══ DISH MODAL ══ -->
+  <!-- DISH MODAL -->
+
   <div class="dish-modal" id="dish-modal" onclick="closeDishModal(event)">
     <div class="dish-modal-card">
-      <div class="dish-modal-icon" id="modal-dish-icon">🍄</div>
-      <div class="dish-modal-name" id="modal-dish-name">Mushroom Risotto</div>
-      <div class="dish-modal-chef" id="modal-dish-chef">by Chef Mushy</div>
-      <div class="dish-modal-status" id="modal-dish-status">Still cooking...</div>
+      <div class="dish-modal-icon" id="modal-dish-icon"></div>
+      <div class="dish-modal-name" id="modal-dish-name"></div>
+      <div class="dish-modal-chef" id="modal-dish-chef"></div>
+      <div class="dish-modal-status" id="modal-dish-status"></div>
       <button class="btn btn-outline" style="width:100%;margin-top:4px;" onclick="document.getElementById('dish-modal').classList.remove('show')">Close</button>
     </div>
   </div>
 
-  <!-- ══ TASTE MODAL ══ -->
+  <!-- TASTE MODAL -->
+
   <div class="taste-modal" id="taste-modal" onclick="closeTasteModal(event)">
     <div class="taste-modal-card">
-      <div class="taste-modal-title" id="taste-modal-title">Taste Chef Mushy's dish?</div>
+      <div class="taste-modal-title" id="taste-modal-title"></div>
       <div class="taste-options">
-        <button class="taste-option opt-good" onclick="submitTaste('good')">
-          <span class="taste-option-emoji">😋</span>Good
-        </button>
-        <button class="taste-option opt-medium" onclick="submitTaste('medium')">
-          <span class="taste-option-emoji">😐</span>Medium
-        </button>
-        <button class="taste-option opt-bad" onclick="submitTaste('bad')">
-          <span class="taste-option-emoji">🤢</span>Bad
-        </button>
+        <button class="taste-option opt-good"   onclick="submitTaste('good')"  ><span class="taste-option-emoji">😋</span>Yummy!</button>
+        <button class="taste-option opt-medium" onclick="submitTaste('medium')"><span class="taste-option-emoji">😐</span>Meh...</button>
+        <button class="taste-option opt-bad"    onclick="submitTaste('bad')"   ><span class="taste-option-emoji">🤢</span>Gross!</button>
       </div>
-      <button class="btn btn-outline btn-full" onclick="document.getElementById('taste-modal').classList.remove('show')">
-        Cancel
-      </button>
+      <button class="btn btn-outline btn-full" onclick="document.getElementById('taste-modal').classList.remove('show')">Cancel</button>
     </div>
   </div>
 
   <script src="utils.js"></script>
+
   <script>
 
-  // ══════════════════════════════
+  // ══════════════════════════════════════
   // DATA
-  // ══════════════════════════════
+  // ══════════════════════════════════════
 
-  const CHEFS = [
-    {
-      id: 0, name: 'Chef Mushy',
-      dish: 'Mushroom Risotto', icon: '🍄',
-      avatar: (expr) => chefSVG_mushroom(expr),
-    },
-    {
-      id: 1, name: 'Chef Lily',
-      dish: 'Lily Pad Soup', icon: '🌿',
-      avatar: (expr) => chefSVG_frog(expr),
-    },
-    {
-      id: 2, name: 'Chef Snaily',
-      dish: 'Garden Stew', icon: '🥗',
-      avatar: (expr) => chefSVG_snail(expr),
-    },
-    {
-      id: 3, name: 'Chef Petal',
-      dish: 'Petal Tart', icon: '🌸',
-      avatar: (expr) => chefSVG_flower(expr),
-    },
-    {
-      id: 4, name: 'Chef Crawly',
-      dish: 'Leaf Ramen', icon: '🍜',
-      avatar: (expr) => chefSVG_caterpillar(expr),
-    }
+  const CHEF_TEMPLATES = [
+    { id:0, name:'Chef Mushy',  avatar: e => svgMushroom(e) },
+    { id:1, name:'Chef Lily',   avatar: e => svgFrog(e) },
+    { id:2, name:'Chef Snaily', avatar: e => svgSnail(e) },
+    { id:3, name:'Chef Petal',  avatar: e => svgFlower(e) },
+    { id:4, name:'Chef Crawly', avatar: e => svgCaterpillar(e) },
   ];
 
-  // ══════════════════════════════
-  // SVG CHEF AVATARS
-  // expr: 'neutral' | 'happy' | 'proud' | 'worried' | 'sad' | 'shocked'
-  // ══════════════════════════════
+  const ALL_DISHES = [
+    {name:'Mushroom Risotto',       icon:'🍄'}, {name:'Lily Pad Soup',          icon:'🌿'},
+    {name:'Garden Stew',            icon:'🥗'}, {name:'Petal Tart',             icon:'🌸'},
+    {name:'Leaf Ramen',             icon:'🍜'}, {name:'Snail Shell Pasta',      icon:'🍝'},
+    {name:'Dewdrop Dumplings',      icon:'🥟'}, {name:'Acorn Bisque',           icon:'🍲'},
+    {name:'Fern Frond Salad',       icon:'🥬'}, {name:'Honeycomb Cake',         icon:'🍯'},
+    {name:'Moss Berry Pie',         icon:'🫐'}, {name:'Pinecone Crumble',       icon:'🌰'},
+    {name:'Raindrop Jelly',         icon:'🍮'}, {name:'Sunbeam Soufflé',        icon:'🧁'},
+    {name:'Pebble Bread',           icon:'🍞'}, {name:'Wildflower Risotto',     icon:'🌼'},
+    {name:'Spider Web Noodles',     icon:'🍥'}, {name:'Bark Bruschetta',        icon:'🥖'},
+    {name:'Toadstool Tacos',        icon:'🌮'}, {name:'Bog Broth',              icon:'🍵'},
+    {name:'Caterpillar Rolls',      icon:'🌯'}, {name:'Grasshopper Gumbo',      icon:'🫕'},
+    {name:'Cobweb Crepes',          icon:'🥞'}, {name:'Puddle Pudding',         icon:'🍮'},
+    {name:'Root Veggie Roast',      icon:'🥕'}, {name:'Cloud Puff Pastry',      icon:'🥐'},
+    {name:'Nettle Noodle Broth',    icon:'🍜'}, {name:'Bramble Jam Toast',      icon:'🍓'},
+    {name:'Midnight Mushroom Stew', icon:'🌙'}, {name:'Sunflower Seed Sushi',   icon:'🍱'},
+  ];
 
-  function mouthPath(expr) {
-    switch(expr) {
-      case 'happy':   return '<path d="M28 38 Q32 44 36 38" stroke="#2D3B36" stroke-width="2" stroke-linecap="round" fill="none"/>';
-      case 'proud':   return '<path d="M26 38 Q32 46 38 38" stroke="#2D3B36" stroke-width="2.5" stroke-linecap="round" fill="none"/>';
-      case 'worried': return '<path d="M28 40 Q32 36 36 40" stroke="#2D3B36" stroke-width="2" stroke-linecap="round" fill="none"/>';
-      case 'sad':     return '<path d="M26 42 Q32 36 38 42" stroke="#2D3B36" stroke-width="2" stroke-linecap="round" fill="none"/>';
-      case 'shocked': return '<ellipse cx="32" cy="40" rx="4" ry="5" fill="#2D3B36"/>';
-      default:        return '<path d="M28 39 Q32 41 36 39" stroke="#2D3B36" stroke-width="2" stroke-linecap="round" fill="none"/>';
+  let CHEFS = [];
+  let priorityOrder = [];
+  let cookTimerInterval = null;
+  let cookTimeLeft = 60;
+  let chefStates = [];
+  let activeTasteChefId = null;
+  let ratingsGiven = 0;
+
+  // ══════════════════════════════════════
+  // SVG AVATARS
+  // ══════════════════════════════════════
+
+  function mouth(e) {
+    switch(e) {
+      case 'happy':   return `<path d="M28 38 Q32 44 36 38" stroke="#2D3B36" stroke-width="2" stroke-linecap="round" fill="none"/>`;
+      case 'proud':   return `<path d="M26 38 Q32 46 38 38" stroke="#2D3B36" stroke-width="2.5" stroke-linecap="round" fill="none"/>`;
+      case 'smug':    return `<path d="M27 39 Q32 45 37 37" stroke="#2D3B36" stroke-width="2.5" stroke-linecap="round" fill="none"/><circle cx="34" cy="36" r="1.5" fill="#2D3B36"/>`;
+      case 'worried': return `<path d="M28 40 Q32 36 36 40" stroke="#2D3B36" stroke-width="2" stroke-linecap="round" fill="none"/>`;
+      case 'sad':     return `<path d="M26 42 Q32 36 38 42" stroke="#2D3B36" stroke-width="2" stroke-linecap="round" fill="none"/>`;
+      case 'crying':  return `<path d="M26 42 Q32 36 38 42" stroke="#2D3B36" stroke-width="2" stroke-linecap="round" fill="none"/>
+                               <ellipse cx="28" cy="44" rx="2.5" ry="4" fill="#7EC8E3" opacity="0.85"/>
+                               <ellipse cx="36" cy="45" rx="2.5" ry="4" fill="#7EC8E3" opacity="0.85"/>`;
+      case 'angry':   return `<path d="M26 42 Q32 36 38 42" stroke="#CC0000" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                               <circle cx="29" cy="38" r="2.5" fill="#FF4444" opacity="0.45"/>
+                               <circle cx="35" cy="38" r="2.5" fill="#FF4444" opacity="0.45"/>`;
+      case 'shocked': return `<ellipse cx="32" cy="40" rx="4" ry="5" fill="#2D3B36"/>`;
+      default:        return `<path d="M28 39 Q32 41 36 39" stroke="#2D3B36" stroke-width="2" stroke-linecap="round" fill="none"/>`;
     }
   }
 
-  function eyeDetail(expr) {
-    if (expr === 'worried') return `
-      <line x1="26" y1="30" x2="30" y2="32" stroke="#2D3B36" stroke-width="1.5" stroke-linecap="round"/>
-      <line x1="34" y1="32" x2="38" y2="30" stroke="#2D3B36" stroke-width="1.5" stroke-linecap="round"/>`;
-    if (expr === 'sad') return `
-      <line x1="26" y1="29" x2="30" y2="32" stroke="#2D3B36" stroke-width="1.5" stroke-linecap="round"/>
-      <line x1="34" y1="32" x2="38" y2="29" stroke="#2D3B36" stroke-width="1.5" stroke-linecap="round"/>`;
-    if (expr === 'proud') return `
-      <path d="M25 31 Q28 28 31 31" stroke="#2D3B36" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-      <path d="M33 31 Q36 28 39 31" stroke="#2D3B36" stroke-width="1.5" fill="none" stroke-linecap="round"/>`;
+  function brows(e) {
+    if (e === 'worried' || e === 'crying')
+      return `<line x1="26" y1="30" x2="30" y2="32" stroke="#2D3B36" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="34" y1="32" x2="38" y2="30" stroke="#2D3B36" stroke-width="1.5" stroke-linecap="round"/>`;
+    if (e === 'sad')
+      return `<line x1="25" y1="29" x2="30" y2="32" stroke="#2D3B36" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="34" y1="32" x2="39" y2="29" stroke="#2D3B36" stroke-width="1.5" stroke-linecap="round"/>`;
+    if (e === 'angry')
+      return `<line x1="25" y1="32" x2="31" y2="28" stroke="#CC0000" stroke-width="2" stroke-linecap="round"/>
+              <line x1="33" y1="28" x2="39" y2="32" stroke="#CC0000" stroke-width="2" stroke-linecap="round"/>`;
+    if (e === 'proud' || e === 'smug')
+      return `<path d="M25 31 Q28 28 31 31" stroke="#2D3B36" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <path d="M33 31 Q36 28 39 31" stroke="#2D3B36" stroke-width="1.5" fill="none" stroke-linecap="round"/>`;
     return '';
   }
 
-  function chefSVG_mushroom(expr) {
+  function hat(x, y, w) {
+    const brimH = 5, crownH = 12, crownW = w - 8;
+    return `<rect x="${x}" y="${y + crownH - 2}" width="${w}" height="${brimH}" rx="2.5" fill="white" stroke="#ddd" stroke-width="1"/>
+            <rect x="${x + 4}" y="${y}" width="${crownW}" height="${crownH}" rx="${Math.floor(crownW/2)}" fill="white" stroke="#ddd" stroke-width="1"/>`;
+  }
+
+  function svgMushroom(e) {
     return `<svg width="56" height="56" viewBox="0 0 64 64" fill="none">
       <ellipse cx="32" cy="46" rx="14" ry="12" fill="#FFB3A7"/>
       <ellipse cx="32" cy="38" rx="22" ry="16" fill="#FF7F6E"/>
       <circle cx="22" cy="33" r="4" fill="white" opacity="0.6"/>
       <circle cx="34" cy="29" r="5" fill="white" opacity="0.6"/>
       <circle cx="43" cy="34" r="3" fill="white" opacity="0.6"/>
+      ${hat(20, 10, 24)}
       <circle cx="28" cy="35" r="3.5" fill="white"/>
       <circle cx="36" cy="35" r="3.5" fill="white"/>
       <circle cx="29" cy="35" r="2" fill="#2D3B36"/>
       <circle cx="37" cy="35" r="2" fill="#2D3B36"/>
       <circle cx="29.5" cy="34.5" r="0.8" fill="white"/>
-      ${eyeDetail(expr)}
-      ${mouthPath(expr)}
-      <rect x="24" y="16" width="16" height="5" rx="2.5" fill="white" stroke="#ddd" stroke-width="1"/>
-      <rect x="26" y="10" width="12" height="10" rx="5" fill="white" stroke="#ddd" stroke-width="1"/>
+      ${brows(e)}${mouth(e)}
+      ${e==='angry' ? '<circle cx="32" cy="50" r="3" fill="#FF6B6B" opacity="0.5"/>' : ''}
     </svg>`;
   }
 
-  function chefSVG_frog(expr) {
+  function svgFrog(e) {
     return `<svg width="56" height="56" viewBox="0 0 64 64" fill="none">
       <ellipse cx="32" cy="44" rx="16" ry="13" fill="#B8E8C8"/>
       <circle cx="20" cy="28" r="8" fill="#B8E8C8"/>
       <circle cx="44" cy="28" r="8" fill="#B8E8C8"/>
+      ${hat(22, 10, 20)}
       <circle cx="20" cy="27" r="5" fill="white"/>
       <circle cx="44" cy="27" r="5" fill="white"/>
       <circle cx="21" cy="27" r="3" fill="#2D3B36"/>
       <circle cx="45" cy="27" r="3" fill="#2D3B36"/>
       <circle cx="21.5" cy="26.5" r="1" fill="white"/>
-      ${eyeDetail(expr)}
-      ${mouthPath(expr === 'neutral' ? 'neutral' : expr)}
-      <rect x="22" y="14" width="20" height="6" rx="3" fill="white" stroke="#ddd" stroke-width="1"/>
-      <rect x="25" y="7" width="14" height="11" rx="5" fill="white" stroke="#ddd" stroke-width="1"/>
+      ${brows(e)}${mouth(e)}
+      ${e==='crying' ? '<path d="M18 43 Q20 50 18 52" stroke="#7EC8E3" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M46 43 Q44 50 46 52" stroke="#7EC8E3" stroke-width="2.5" stroke-linecap="round" fill="none"/>' : ''}
     </svg>`;
   }
 
-  function chefSVG_snail(expr) {
+  function svgSnail(e) {
     return `<svg width="56" height="56" viewBox="0 0 64 64" fill="none">
-      <circle cx="38" cy="32" rx="14" ry="14" fill="#FFDAB3" stroke="#FFB37A" stroke-width="1.5"/>
-      <path d="M38 22 Q46 22 46 32 Q46 42 38 42 Q30 42 30 32 Q30 22 38 22Z" fill="#FFB37A" opacity="0.4"/>
-      <circle cx="38" cy="32" r="6" fill="#FF8C5A" opacity="0.25"/>
+      <circle cx="38" cy="32" r="14" fill="#FFDAB3" stroke="#FFB37A" stroke-width="1.5"/>
+      <path d="M38 22 Q46 22 46 32 Q46 42 38 42 Q30 42 30 32 Q30 22 38 22Z" fill="#FFB37A" opacity="0.35"/>
+      <circle cx="38" cy="32" r="6" fill="#FF8C5A" opacity="0.2"/>
       <ellipse cx="22" cy="44" rx="12" ry="7" fill="#A8E6E3"/>
-      <circle cx="15" cy="42" r="4.5" fill="#A8E6E3"/>
-      <circle cx="15" cy="41" r="2.5" fill="white"/>
-      <circle cx="15.5" cy="41" r="1.5" fill="#2D3B36"/>
-      <circle cx="15.7" cy="40.8" r="0.6" fill="white"/>
-      ${eyeDetail(expr)}
-      ${mouthPath(expr)}
-      <rect x="10" y="28" width="12" height="5" rx="2.5" fill="white" stroke="#ddd" stroke-width="1"/>
-      <rect x="12" y="22" width="8" height="10" rx="4" fill="white" stroke="#ddd" stroke-width="1"/>
+      ${hat(8, 20, 16)}
+      <circle cx="15" cy="41" r="4.5" fill="#A8E6E3"/>
+      <circle cx="15" cy="40" r="2.5" fill="white"/>
+      <circle cx="15.5" cy="40" r="1.5" fill="#2D3B36"/>
+      <circle cx="15.7" cy="39.8" r="0.6" fill="white"/>
+      ${brows(e)}${mouth(e)}
     </svg>`;
   }
 
-  function chefSVG_flower(expr) {
+  function svgFlower(e) {
     return `<svg width="56" height="56" viewBox="0 0 64 64" fill="none">
-      <circle cx="32" cy="32" r="14" fill="#FFE8A3"/>
       <circle cx="32" cy="18" r="8" fill="#FFB3A7"/>
       <circle cx="32" cy="46" r="8" fill="#FFB3A7"/>
       <circle cx="18" cy="32" r="8" fill="#FFB3A7"/>
       <circle cx="46" cy="32" r="8" fill="#FFB3A7"/>
       <circle cx="32" cy="32" r="10" fill="#FF7F6E" opacity="0.85"/>
       <circle cx="32" cy="32" r="6" fill="#FFE8A3"/>
+      ${hat(22, 8, 20)}
       <circle cx="29" cy="31" r="2.5" fill="white"/>
       <circle cx="35" cy="31" r="2.5" fill="white"/>
       <circle cx="29.5" cy="31" r="1.5" fill="#2D3B36"/>
       <circle cx="35.5" cy="31" r="1.5" fill="#2D3B36"/>
       <circle cx="30" cy="30.5" r="0.6" fill="white"/>
-      ${eyeDetail(expr)}
-      ${mouthPath(expr)}
-      <rect x="24" y="14" width="16" height="5" rx="2.5" fill="white" stroke="#ddd" stroke-width="1"/>
-      <rect x="27" y="8" width="10" height="9" rx="4" fill="white" stroke="#ddd" stroke-width="1"/>
+      ${brows(e)}${mouth(e)}
     </svg>`;
   }
 
-  function chefSVG_caterpillar(expr) {
+  function svgCaterpillar(e) {
     return `<svg width="56" height="56" viewBox="0 0 64 64" fill="none">
       <circle cx="14" cy="46" r="8" fill="#C9C3E8"/>
       <circle cx="24" cy="44" r="9" fill="#C9C3E8"/>
       <circle cx="35" cy="43" r="10" fill="#C9C3E8"/>
       <circle cx="46" cy="40" r="11" fill="#B8A8E0"/>
+      ${hat(36, 18, 22)}
+      <line x1="43" y1="32" x2="41" y2="26" stroke="#C9C3E8" stroke-width="1.5"/>
+      <line x1="49" y1="32" x2="51" y2="26" stroke="#C9C3E8" stroke-width="1.5"/>
       <circle cx="46" cy="40" r="7" fill="white"/>
       <circle cx="43" cy="38" r="3" fill="white"/>
       <circle cx="50" cy="38" r="3" fill="white"/>
       <circle cx="43.5" cy="38" r="2" fill="#2D3B36"/>
       <circle cx="50.5" cy="38" r="2" fill="#2D3B36"/>
       <circle cx="44" cy="37.5" r="0.7" fill="white"/>
-      ${eyeDetail(expr)}
-      ${mouthPath(expr)}
-      <rect x="38" y="24" width="16" height="5" rx="2.5" fill="white" stroke="#ddd" stroke-width="1"/>
-      <rect x="41" y="18" width="10" height="10" rx="5" fill="white" stroke="#ddd" stroke-width="1"/>
-      <line x1="43" y1="29" x2="41" y2="24" stroke="#C9C3E8" stroke-width="1.5"/>
-      <line x1="49" y1="29" x2="51" y2="24" stroke="#C9C3E8" stroke-width="1.5"/>
+      ${brows(e)}${mouth(e)}
     </svg>`;
   }
 
-  // ══════════════════════════════
-  // GAME STATE
-  // ══════════════════════════════
+  // ══════════════════════════════════════
+  // SETUP
+  // ══════════════════════════════════════
 
-  let priorityOrder = [0, 1, 2, 3, 4]; // indices into CHEFS
-  let cookTimerInterval = null;
-  let cookTimeLeft = 60;
-  let chefStates = []; // { tasteResult, cookProgress, expression, rating }
-  let activeTasteChefId = null;
-  let activeDishChefId = null;
-  let ratingsGiven = 0;
+  function setupGame() {
+    const dishes = [...ALL_DISHES].sort(() => Math.random() - 0.5).slice(0, 5);
+    const order  = [...CHEF_TEMPLATES].sort(() => Math.random() - 0.5);
+    CHEFS = order.map((chef, i) => ({ ...chef, dish: dishes[i].name, icon: dishes[i].icon }));
+    priorityOrder = [0, 1, 2, 3, 4];
+    ratingsGiven = 0;
+    chefStates = CHEFS.map(() => ({
+      tasteHistory: [], yummyScore: 50,
+      cookPct: 0, done: false, expression: 'neutral', rating: 0,
+    }));
+  }
 
-  // ══════════════════════════════
-  // PHASE 1 — PRIORITY DRAG
-  // ══════════════════════════════
+  // ══════════════════════════════════════
+  // PHASE 1 — PRIORITY LIST
+  // ══════════════════════════════════════
 
   function initPriorityList() {
     const list = document.getElementById('priority-list');
@@ -915,111 +689,65 @@
           <div class="priority-dish-name">${chef.dish}</div>
           <div class="priority-dish-desc">by ${chef.name}</div>
         </div>
-        <div class="drag-handle">⠿</div>
+        <div class="priority-arrows">
+          <button class="arrow-btn" onclick="moveItem(${rank},-1)" ${rank === 0 ? 'disabled' : ''} title="Move up">▲</button>
+          <button class="arrow-btn" onclick="moveItem(${rank}, 1)" ${rank === 4 ? 'disabled' : ''} title="Move down">▼</button>
+        </div>
       `;
-
-      // Desktop drag events
       item.addEventListener('dragstart', onDragStart);
-      item.addEventListener('dragover', onDragOver);
-      item.addEventListener('drop', onDrop);
-      item.addEventListener('dragend', onDragEnd);
-
-      // Touch drag
+      item.addEventListener('dragover',  onDragOver);
+      item.addEventListener('drop',      onDrop);
+      item.addEventListener('dragend',   onDragEnd);
       item.addEventListener('touchstart', onTouchStart, { passive: true });
-      item.addEventListener('touchmove', onTouchMove, { passive: false });
-      item.addEventListener('touchend', onTouchEnd);
-
+      item.addEventListener('touchmove',  onTouchMove,  { passive: false });
+      item.addEventListener('touchend',   onTouchEnd);
       list.appendChild(item);
     });
   }
 
-  // ── Desktop drag ──
+  function moveItem(rank, dir) {
+    const nr = rank + dir;
+    if (nr < 0 || nr > 4) return;
+    [priorityOrder[rank], priorityOrder[nr]] = [priorityOrder[nr], priorityOrder[rank]];
+    initPriorityList();
+  }
+
   let dragSrcRank = null;
-
-  function onDragStart(e) {
-    dragSrcRank = parseInt(this.dataset.rank);
-    this.classList.add('dragging');
-    e.dataTransfer.effectAllowed = 'move';
-  }
-
-  function onDragOver(e) {
-    e.preventDefault();
-    document.querySelectorAll('.priority-item').forEach(i => i.classList.remove('drag-over'));
-    this.classList.add('drag-over');
-    e.dataTransfer.dropEffect = 'move';
-  }
-
+  function onDragStart(e) { dragSrcRank = +this.dataset.rank; this.classList.add('dragging'); e.dataTransfer.effectAllowed='move'; }
+  function onDragOver(e)  { e.preventDefault(); document.querySelectorAll('.priority-item').forEach(i=>i.classList.remove('drag-over')); this.classList.add('drag-over'); }
   function onDrop(e) {
     e.preventDefault();
-    const targetRank = parseInt(this.dataset.rank);
-    if (dragSrcRank !== null && dragSrcRank !== targetRank) {
-      const moved = priorityOrder.splice(dragSrcRank, 1)[0];
-      priorityOrder.splice(targetRank, 0, moved);
-      initPriorityList();
+    const t = +this.dataset.rank;
+    if (dragSrcRank !== null && dragSrcRank !== t) {
+      const m = priorityOrder.splice(dragSrcRank,1)[0]; priorityOrder.splice(t,0,m); initPriorityList();
     }
   }
+  function onDragEnd() { document.querySelectorAll('.priority-item').forEach(i=>i.classList.remove('dragging','drag-over')); dragSrcRank=null; }
 
-  function onDragEnd() {
-    document.querySelectorAll('.priority-item').forEach(i => {
-      i.classList.remove('dragging', 'drag-over');
-    });
-    dragSrcRank = null;
-  }
-
-  // ── Touch drag ──
-  let touchDragEl = null;
-  let touchClone = null;
-  let touchStartY = 0;
-  let touchSrcRank = null;
-
-  function onTouchStart(e) {
-    touchDragEl = this;
-    touchSrcRank = parseInt(this.dataset.rank);
-    touchStartY = e.touches[0].clientY;
-    this.classList.add('dragging');
-  }
-
+  let touchSrcRank=null, touchDragEl=null;
+  function onTouchStart(e) { touchDragEl=this; touchSrcRank=+this.dataset.rank; this.classList.add('dragging'); }
   function onTouchMove(e) {
     e.preventDefault();
-    if (!touchDragEl) return;
-    const touch = e.touches[0];
-    const items = [...document.querySelectorAll('.priority-item')];
-    items.forEach(i => i.classList.remove('drag-over'));
-    const target = document.elementFromPoint(touch.clientX, touch.clientY)?.closest('.priority-item');
-    if (target && target !== touchDragEl) target.classList.add('drag-over');
+    document.querySelectorAll('.priority-item').forEach(i=>i.classList.remove('drag-over'));
+    const el=document.elementFromPoint(e.touches[0].clientX,e.touches[0].clientY)?.closest('.priority-item');
+    if (el && el!==touchDragEl) el.classList.add('drag-over');
   }
-
   function onTouchEnd(e) {
     if (!touchDragEl) return;
-    const touch = e.changedTouches[0];
-    const target = document.elementFromPoint(touch.clientX, touch.clientY)?.closest('.priority-item');
-    if (target && target !== touchDragEl) {
-      const targetRank = parseInt(target.dataset.rank);
-      const moved = priorityOrder.splice(touchSrcRank, 1)[0];
-      priorityOrder.splice(targetRank, 0, moved);
-      initPriorityList();
-    } else {
-      touchDragEl.classList.remove('dragging');
-      document.querySelectorAll('.priority-item').forEach(i => i.classList.remove('drag-over'));
-    }
-    touchDragEl = null;
-    touchSrcRank = null;
+    const el=document.elementFromPoint(e.changedTouches[0].clientX,e.changedTouches[0].clientY)?.closest('.priority-item');
+    if (el && el!==touchDragEl) {
+      const tr=+el.dataset.rank; const m=priorityOrder.splice(touchSrcRank,1)[0]; priorityOrder.splice(tr,0,m); initPriorityList();
+    } else { touchDragEl.classList.remove('dragging'); document.querySelectorAll('.priority-item').forEach(i=>i.classList.remove('drag-over')); }
+    touchDragEl=null; touchSrcRank=null;
   }
 
-  // ══════════════════════════════
+  // ══════════════════════════════════════
   // PHASE 2 — COOKING
-  // ══════════════════════════════
+  // ══════════════════════════════════════
 
   function startCooking() {
-    // Init chef states
-    chefStates = CHEFS.map(() => ({
-      tasteResult: null,
-      expression: 'neutral',
-      rating: 0,
-      done: false,
-    }));
+    chefStates = CHEFS.map(() => ({ tasteHistory:[], yummyScore:50, cookPct:0, done:false, expression:'neutral', rating:0 }));
     ratingsGiven = 0;
-
     showPhase('phase-cooking');
     buildChefGrid();
     startCookTimer();
@@ -1033,19 +761,20 @@
       card.className = 'chef-card';
       card.id = `chef-card-${i}`;
       card.innerHTML = `
-        <div class="chef-avatar" id="avatar-${i}">${chef.avatar('neutral')}</div>
+        <div class="chef-avatar-wrap" id="avatar-${i}">${chef.avatar('neutral')}</div>
         <div class="chef-info">
           <div class="chef-name">${chef.name}</div>
           <div class="chef-dish-label">${chef.dish}</div>
-          <div class="cook-progress-wrap">
-            <div class="cook-progress-bar" id="progress-${i}"></div>
+          <div class="cook-progress-wrap"><div class="cook-progress-bar" id="progress-${i}"></div></div>
+          <div class="yummy-wrap">
+            <span class="yummy-label">Yummy</span>
+            <div class="yummy-bar-outer"><div class="yummy-bar-inner" id="yummy-${i}" style="width:50%"></div></div>
+            <span class="yummy-emoji" id="yummy-emoji-${i}">😐</span>
           </div>
+          <div class="last-taste" id="last-taste-${i}"></div>
         </div>
-        <span class="taste-badge" id="taste-badge-${i}"></span>
         <button class="taste-btn" id="taste-btn-${i}" onclick="openTasteModal(${i})">👅 Taste</button>
-        <div class="dish-thumb cooking" id="dish-thumb-${i}" onclick="openDishModal(${i})" title="${chef.dish}">
-          ${chef.icon}
-        </div>
+        <div class="dish-thumb cooking" id="dish-thumb-${i}" onclick="openDishModal(${i})">${chef.icon}</div>
       `;
       grid.appendChild(card);
     });
@@ -1053,72 +782,68 @@
 
   function startCookTimer() {
     cookTimeLeft = 60;
-    updateCookTimer();
-
-    // Stagger cook completion slightly per chef for visual variety
-    const completionTimes = CHEFS.map((_, i) => 55 + Math.random() * 5);
-
+    updateCookTimerDisplay();
+    const completionTimes = CHEFS.map(() => 52 + Math.random() * 8);
     cookTimerInterval = setInterval(() => {
       cookTimeLeft--;
-      updateCookTimer();
-
-      // Update each chef's cook progress
+      updateCookTimerDisplay();
       const elapsed = 60 - cookTimeLeft;
       CHEFS.forEach((_, i) => {
         const pct = Math.min((elapsed / completionTimes[i]) * 100, 100);
+        chefStates[i].cookPct = pct;
         const bar = document.getElementById(`progress-${i}`);
         if (bar) bar.style.width = pct + '%';
-
-        if (pct >= 100 && !chefStates[i].done) {
-          chefStates[i].done = true;
-          markChefDone(i);
-        }
+        if (pct >= 100 && !chefStates[i].done) { chefStates[i].done = true; markChefDone(i); }
       });
-
       if (cookTimeLeft <= 0) {
         clearInterval(cookTimerInterval);
-        // Force all done
-        CHEFS.forEach((_, i) => {
-          if (!chefStates[i].done) markChefDone(i);
-        });
-        setTimeout(() => showPhase('phase-rating'), 800);
+        CHEFS.forEach((_,i) => { if (!chefStates[i].done) markChefDone(i); });
         buildRatingList();
+        setTimeout(() => showPhase('phase-rating'), 700);
       }
     }, 1000);
   }
 
-  function updateCookTimer() {
-    const el = document.getElementById('cook-timer');
-    const bar = document.getElementById('timer-bar');
+  function updateCookTimerDisplay() {
+    const el=document.getElementById('cook-timer'), bar=document.getElementById('timer-bar');
     if (!el) return;
     el.textContent = cookTimeLeft;
     el.classList.toggle('urgent', cookTimeLeft <= 10);
-    if (bar) {
-      bar.style.width = (cookTimeLeft / 60 * 100) + '%';
-      bar.classList.toggle('urgent', cookTimeLeft <= 10);
-    }
+    if (bar) { bar.style.width=(cookTimeLeft/60*100)+'%'; bar.classList.toggle('urgent', cookTimeLeft<=10); }
   }
 
   function markChefDone(i) {
-    const bar = document.getElementById(`progress-${i}`);
-    const thumb = document.getElementById(`dish-thumb-${i}`);
-    const tasteBtn = document.getElementById(`taste-btn-${i}`);
-    if (bar) bar.classList.add('done');
+    const bar=document.getElementById(`progress-${i}`);
+    const thumb=document.getElementById(`dish-thumb-${i}`);
+    const btn=document.getElementById(`taste-btn-${i}`);
+    if (bar) { bar.style.width='100%'; bar.classList.add('done'); }
     if (thumb) { thumb.classList.remove('cooking'); thumb.classList.add('ready'); }
-    if (tasteBtn) tasteBtn.disabled = true;
-    // Chefs who weren't tasted look proud on completion
-    if (!chefStates[i].tasteResult) updateChefExpression(i, 'proud');
+    if (btn) btn.disabled = true;
+    if (chefStates[i].tasteHistory.length === 0) popExpression(i, 'proud');
   }
 
-  // ══════════════════════════════
-  // TASTE MODAL
-  // ══════════════════════════════
+  // ══════════════════════════════════════
+  // YUMMY METER
+  // ══════════════════════════════════════
+
+  function updateYummyMeter(i) {
+    const score = chefStates[i].yummyScore;
+    const bar   = document.getElementById(`yummy-${i}`);
+    const emoji = document.getElementById(`yummy-emoji-${i}`);
+    if (bar) bar.style.width = score + '%';
+    if (emoji) emoji.textContent =
+      score >= 75 ? '🤩' : score >= 55 ? '😋' : score >= 40 ? '😐' : score >= 22 ? '😟' : '🤢';
+  }
+
+  // ══════════════════════════════════════
+  // TASTE — unlimited during cooking
+  // ══════════════════════════════════════
 
   function openTasteModal(chefId) {
     if (chefStates[chefId].done) return;
     activeTasteChefId = chefId;
     document.getElementById('taste-modal-title').textContent =
-      `How does ${CHEFS[chefId].name}'s dish taste so far?`;
+      `How does ${CHEFS[chefId].name}'s dish taste?`;
     document.getElementById('taste-modal').classList.add('show');
   }
 
@@ -1131,67 +856,91 @@
     document.getElementById('taste-modal').classList.remove('show');
     const i = activeTasteChefId;
     if (i === null) return;
-    chefStates[i].tasteResult = result;
-
-    // Update badge
-    const badge = document.getElementById(`taste-badge-${i}`);
-    badge.textContent = result === 'good' ? '😋 Good' : result === 'medium' ? '😐 Medium' : '🤢 Bad';
-    badge.className = `taste-badge show ${result}`;
-
-    // Update card border
-    const card = document.getElementById(`chef-card-${i}`);
-    card.className = `chef-card tasted-${result}`;
-
-    // Expression
-    const expr = result === 'good' ? 'happy' : result === 'medium' ? 'worried' : 'sad';
-    updateChefExpression(i, expr);
-
-    // Disable taste button
-    document.getElementById(`taste-btn-${i}`).disabled = true;
     activeTasteChefId = null;
+
+    chefStates[i].tasteHistory.push(result);
+
+    // Yummy score delta
+    const delta = result === 'good' ? 18 : result === 'medium' ? 2 : -22;
+    chefStates[i].yummyScore = Math.max(0, Math.min(100, chefStates[i].yummyScore + delta));
+    updateYummyMeter(i);
+
+    // Last taste label
+    const lastEl = document.getElementById(`last-taste-${i}`);
+    if (lastEl) {
+      lastEl.className = `last-taste ${result}`;
+      lastEl.textContent = result==='good' ? '👅 Last taste: Yummy!' : result==='medium' ? '👅 Last taste: Meh...' : '👅 Last taste: Gross!';
+    }
+
+    // Card border
+    const card = document.getElementById(`chef-card-${i}`);
+    if (card) card.className = `chef-card tasted-${result}`;
+
+    // Expression: escalates with repeated bad/good
+    let expr;
+    const badCount  = chefStates[i].tasteHistory.filter(t=>t==='bad').length;
+    const goodCount = chefStates[i].tasteHistory.filter(t=>t==='good').length;
+    if (result === 'bad') {
+      expr = badCount >= 2 ? 'angry' : 'crying';
+    } else if (result === 'good') {
+      expr = goodCount >= 2 ? 'smug' : 'happy';
+    } else {
+      expr = 'worried';
+    }
+    popExpression(i, expr);
   }
 
-  function updateChefExpression(i, expr) {
-    chefStates[i].expression = expr;
-    const avatar = document.getElementById(`avatar-${i}`);
-    if (avatar) avatar.innerHTML = CHEFS[i].avatar(expr);
+  // ══════════════════════════════════════
+  // EXPRESSION + SCALE POP
+  // ══════════════════════════════════════
+
+  function popExpression(chefId, expr) {
+    chefStates[chefId].expression = expr;
+    const wrap = document.getElementById(`avatar-${chefId}`);
+    if (!wrap) return;
+    wrap.innerHTML = CHEFS[chefId].avatar(expr);
+    wrap.classList.remove('popping');
+    void wrap.offsetWidth; // force reflow to restart animation
+    wrap.classList.add('popping');
+    setTimeout(() => wrap.classList.remove('popping'), 4200);
   }
 
-  // ══════════════════════════════
+  // ══════════════════════════════════════
   // DISH MODAL
-  // ══════════════════════════════
+  // ══════════════════════════════════════
 
   function openDishModal(chefId) {
-    const chef = CHEFS[chefId];
+    const chef  = CHEFS[chefId];
     const state = chefStates[chefId];
     document.getElementById('modal-dish-icon').textContent = chef.icon;
     document.getElementById('modal-dish-name').textContent = chef.dish;
     document.getElementById('modal-dish-chef').textContent = `by ${chef.name}`;
     const statusEl = document.getElementById('modal-dish-status');
-    if (state && state.done) {
+    if (state.done) {
       statusEl.textContent = '✅ Ready to plate!';
-      statusEl.style.background = '#D4F5E2';
-      statusEl.style.color = '#27AE60';
+      statusEl.style.cssText = 'background:#D4F5E2;color:#27AE60;';
     } else {
-      statusEl.textContent = '🔥 Still cooking...';
-      statusEl.style.background = 'var(--coral-pale)';
-      statusEl.style.color = 'var(--coral)';
+      statusEl.textContent = `🔥 Cooking... ${Math.round(state.cookPct)}%`;
+      statusEl.style.cssText = 'background:var(--coral-pale);color:var(--coral);';
     }
     document.getElementById('dish-modal').classList.add('show');
   }
 
   function closeDishModal(e) {
-    if (e.target === document.getElementById('dish-modal'))
+    if (e.target===document.getElementById('dish-modal'))
       document.getElementById('dish-modal').classList.remove('show');
   }
 
-  // ══════════════════════════════
+  // ══════════════════════════════════════
   // PHASE 3 — RATING
-  // ══════════════════════════════
+  // ══════════════════════════════════════
 
   function buildRatingList() {
     const list = document.getElementById('rating-list');
     list.innerHTML = '';
+    ratingsGiven = 0;
+    const btn = document.getElementById('rating-submit-btn');
+    btn.disabled = true; btn.style.opacity = '0.5';
     CHEFS.forEach((chef, i) => {
       const card = document.createElement('div');
       card.className = 'rating-card';
@@ -1202,7 +951,7 @@
           <div class="rating-dish-name">${chef.dish}</div>
         </div>
         <div class="star-row" id="stars-${i}">
-          ${[1,2,3,4,5].map(s => `<span class="star" data-chef="${i}" data-val="${s}" onclick="setRating(${i},${s})">⭐</span>`).join('')}
+          ${[1,2,3,4,5].map(s=>`<span class="star" data-val="${s}" onclick="setRating(${i},${s})">⭐</span>`).join('')}
         </div>
       `;
       list.appendChild(card);
@@ -1212,57 +961,39 @@
   function setRating(chefId, val) {
     const wasRated = chefStates[chefId].rating > 0;
     chefStates[chefId].rating = val;
-    if (!wasRated) {
-      ratingsGiven++;
-      if (ratingsGiven === CHEFS.length) {
-        const btn = document.getElementById('rating-submit-btn');
-        btn.disabled = false;
-        btn.style.opacity = '1';
-      }
-    }
-    // Light up stars
-    document.querySelectorAll(`#stars-${chefId} .star`).forEach(star => {
-      star.classList.toggle('lit', parseInt(star.dataset.val) <= val);
-    });
-    // Update chef expression based on stars
-    const expr = val >= 4 ? 'proud' : val === 3 ? 'happy' : val === 2 ? 'worried' : 'sad';
-    updateChefExpression(chefId, expr);
+    if (!wasRated) { ratingsGiven++; if (ratingsGiven === 5) { const b=document.getElementById('rating-submit-btn'); b.disabled=false; b.style.opacity='1'; } }
+    document.querySelectorAll(`#stars-${chefId} .star`).forEach(s => s.classList.toggle('lit', +s.dataset.val <= val));
+    popExpression(chefId, val>=4 ? 'smug' : val===3 ? 'happy' : val===2 ? 'worried' : 'crying');
   }
 
-  // ══════════════════════════════
+  // ══════════════════════════════════════
   // PHASE 4 — RESULTS
-  // ══════════════════════════════
+  // ══════════════════════════════════════
 
   function submitRatings() {
-    // Sort by rating descending
-    const ranked = CHEFS.map((chef, i) => ({
+    const ranked = CHEFS.map((chef,i) => ({
       chef, i,
       rating: chefStates[i].rating,
-      taste: chefStates[i].tasteResult,
+      tasteCount: chefStates[i].tasteHistory.length,
+      lastTaste: chefStates[i].tasteHistory.slice(-1)[0] || null,
       expression: chefStates[i].expression,
-    })).sort((a, b) => b.rating - a.rating);
+    })).sort((a,b) => b.rating - a.rating);
 
     const list = document.getElementById('results-list');
     list.innerHTML = '';
-    const medals = ['🥇', '🥈', '🥉', '4️⃣', '5️⃣'];
+    const medals = ['🥇','🥈','🥉','4️⃣','5️⃣'];
 
     ranked.forEach((item, rank) => {
-      // Compare against priority prediction
-      const predictedRank = priorityOrder.indexOf(item.i);
-      const actualRank = rank;
-      const diff = Math.abs(predictedRank - actualRank);
-      const predBadge = diff === 0
-        ? '<span class="prediction-badge match">✓ Called it!</span>'
-        : diff === 1
-        ? '<span class="prediction-badge close">~ Close</span>'
-        : '<span class="prediction-badge miss">✗ Surprise!</span>';
-
-      const tasteNote = item.taste
-        ? `Tasted: <strong>${item.taste}</strong>`
+      const diff = Math.abs(priorityOrder.indexOf(item.i) - rank);
+      const predBadge = diff===0
+        ? `<span class="prediction-badge match">✓ Called it!</span>`
+        : diff===1
+        ? `<span class="prediction-badge close">~ Close</span>`
+        : `<span class="prediction-badge miss">✗ Surprise!</span>`;
+      const stars = '⭐'.repeat(item.rating)+'☆'.repeat(5-item.rating);
+      const tasteNote = item.tasteCount > 0
+        ? `Tasted ${item.tasteCount}× · last: ${item.lastTaste}`
         : 'Not tasted';
-
-      const stars = '⭐'.repeat(item.rating) + '☆'.repeat(5 - item.rating);
-
       const card = document.createElement('div');
       card.className = 'result-card';
       card.innerHTML = `
@@ -1273,50 +1004,42 @@
           <div class="result-stars">${stars}</div>
           <div class="result-taste-note">${tasteNote} &nbsp;${predBadge}</div>
         </div>
-        <div style="flex-shrink:0">${item.chef.avatar(item.expression)}</div>
+        <div style="flex-shrink:0;width:48px;">${item.chef.avatar(item.expression)}</div>
       `;
       list.appendChild(card);
     });
 
-    // Summary line
-    const perfectPredictions = ranked.filter((item, rank) => priorityOrder.indexOf(item.i) === rank).length;
+    const perfect = ranked.filter((item,rank) => priorityOrder.indexOf(item.i)===rank).length;
     document.getElementById('results-summary').textContent =
-      perfectPredictions === 5
-        ? 'Perfect predictions! You know your dishes. 🌟'
-        : perfectPredictions >= 3
-        ? `${perfectPredictions} predictions correct — not bad, Chef!`
-        : `Only ${perfectPredictions} predictions right. Surprises all round!`;
+      perfect===5 ? 'Perfect predictions! You know your dishes. 🌟'
+      : perfect>=3 ? `${perfect} predictions correct — not bad, Chef!`
+      : `Only ${perfect} right. Those chefs had other ideas!`;
 
     showPhase('phase-results');
     launchConfetti('confetti-container');
   }
 
-  // ══════════════════════════════
+  // ══════════════════════════════════════
   // HELPERS
-  // ══════════════════════════════
+  // ══════════════════════════════════════
 
   function showPhase(id) {
-    ['phase-priority', 'phase-cooking', 'phase-rating', 'phase-results'].forEach(p => {
-      document.getElementById(p).classList.add('hidden');
-    });
+    ['phase-priority','phase-cooking','phase-rating','phase-results'].forEach(p =>
+      document.getElementById(p).classList.add('hidden'));
     document.getElementById(id).classList.remove('hidden');
-    window.scrollTo(0, 0);
+    window.scrollTo(0,0);
   }
 
   function restartGame() {
     clearInterval(cookTimerInterval);
-    priorityOrder = [0, 1, 2, 3, 4];
+    setupGame();
     initPriorityList();
     showPhase('phase-priority');
   }
 
-  // ══════════════════════════════
-  // INIT
-  // ══════════════════════════════
-  document.addEventListener('DOMContentLoaded', () => {
-    initPriorityList();
-  });
+  document.addEventListener('DOMContentLoaded', () => { setupGame(); initPriorityList(); });
 
   </script>
+
 </body>
 </html>
