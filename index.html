@@ -62,9 +62,9 @@ justify-content: center;
 padding: 40px 24px;
 }
 
-#start-screen .blob-1 { width: 300px; height: 300px; background: background: var(--coral-light); opacity: 0.4; top: -80px; right: -60px; }
-#start-screen .blob-2 { width: 250px; height: 250px; background: var(--teal-light); opacity: 0.35; bottom: 40px; left: -80px; }
-#start-screen .blob-3 { width: 180px; height: 180px; background: var(-butter); opacity: 0.5; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+#start-screen .blob-1 { width: 300px; height: 300px; background: var(–coral-light); opacity: 0.4; top: -80px; right: -60px; }
+#start-screen .blob-2 { width: 250px; height: 250px; background: var(–teal-light); opacity: 0.35; bottom: 40px; left: -80px; }
+#start-screen .blob-3 { width: 180px; height: 180px; background: var(–butter); opacity: 0.5; top: 50%; left: 50%; transform: translate(-50%,-50%); }
 
 .start-inner {
 position: relative;
@@ -101,7 +101,7 @@ animation: float 3s ease-in-out infinite;
 }
 
 .app-logo {
-font-family: 'Fredoka One', sans-serif;
+font-family: ‘Fredoka One’, sans-serif;
 font-size: 48px;
 color: var(–coral);
 letter-spacing: -1px;
@@ -154,7 +154,7 @@ box-shadow: 0 0 0 4px rgba(77,191,184,0.15);
 
 /* ── BUTTONS ── */
 .btn {
-font-family: 'Nunito', sans-serif;
+font-family: ‘Nunito’, sans-serif;
 font-weight: 800;
 font-size: 17px;
 border: none;
@@ -212,7 +212,7 @@ gap: 8px;
 }
 
 .greeting {
-font-family: 'Fredoka One', sans-serif;
+font-family: ‘Fredoka One’, sans-serif;
 font-size: 32px;
 color: var(–text-dark);
 text-align: center;
@@ -255,12 +255,10 @@ box-shadow: 0 16px 48px rgba(77,191,184,0.2);
 border-color: var(–teal-light);
 }
 
-.activity-card-icon {
-font-size: 44px;
-}
+.activity-card-icon { font-size: 44px; }
 
 .activity-card-title {
-font-family: 'Fredoka One', cursive;
+font-family: ‘Fredoka One’, cursive;
 font-size: 26px;
 color: var(–teal);
 }
@@ -334,7 +332,7 @@ margin-left: 16px;
 }
 
 .timer-num {
-font-family: 'Fredoka One', sans-serif;
+font-family: ‘Fredoka One’, sans-serif;
 font-size: 22px;
 color: var(–coral);
 min-width: 28px;
@@ -387,7 +385,7 @@ display: block;
 }
 
 .riddle-text {
-font-family: 'Fredoka One', sans-serif;
+font-family: ‘Fredoka One’, sans-serif;
 font-size: 22px;
 color: var(–text-dark);
 line-height: 1.4;
@@ -436,7 +434,7 @@ padding: 24px;
 
 .overlay-card {
 background: white;
-border-radius: 28px 28px 28px 28px;
+border-radius: 28px;
 padding: 32px;
 width: 100%;
 max-width: 480px;
@@ -449,7 +447,7 @@ gap: 16px;
 @keyframes slideUp { from { transform: translateY(60px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
 .overlay-title {
-font-family: 'Fredoka One', sans-serif;
+font-family: ‘Fredoka One’, sans-serif;
 font-size: 22px;
 color: var(–coral);
 }
@@ -505,7 +503,7 @@ gap: 8px;
 @keyframes bounce { 0%,100% { transform: scale(1); } 50% { transform: scale(1.2); } }
 
 .celeb-title {
-font-family: 'Fredoka One', sans-serif;
+font-family: ‘Fredoka One’, sans-serif;
 font-size: 40px;
 color: var(–coral);
 text-align: center;
@@ -604,7 +602,7 @@ letter-spacing: 1px;
 }
 
 .score-val {
-font-family: ‘Fredoka One’, sans-serif;
+font-family: ‘Fredoka One’, cursive;
 font-size: 22px;
 color: var(–teal);
 }
@@ -733,7 +731,6 @@ font-size: 22px;
   <div class="blob blob-3"></div>
 
   <div class="start-inner">
-    <!-- Illustrations -->
     <div class="illus-row">
       <!-- Snail -->
       <svg class="illus" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -784,7 +781,7 @@ font-size: 22px;
 
 ```
 <h1 class="app-logo">🌿 Brainsprout</h1>
-<p class="app-tagline">Riddles, games & general brain chaos</p>
+<p class="app-tagline">Riddles, games &amp; general brain chaos</p>
 
 <div class="name-card">
   <label for="name-input">What's your name, genius?</label>
@@ -897,6 +894,7 @@ font-size: 22px;
   <div class="riddle-body">
     <div class="riddle-num" id="riddle-num">Riddle 1 of 7</div>
     <div class="riddle-card">
+      <span class="riddle-deco" id="riddle-deco">🌿</span>
       <p class="riddle-text" id="riddle-text">Loading riddle...</p>
     </div>
     <div class="riddle-actions">
@@ -951,7 +949,6 @@ async function fetchRiddlesFromSheet() {
     const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
     const res = await fetch(url);
     const text = await res.text();
-    // Strip Google's callback wrapper
     const json = JSON.parse(text.substring(text.indexOf('{'), text.lastIndexOf('}') + 1));
     const rows = json.table.rows;
     const parsed = rows.map(row => ({
@@ -1031,7 +1028,6 @@ const ALL_RIDDLES = [
   { riddle: "I speak without a mouth and hear without ears. I have no body but come alive with wind. What am I?", answer: "An echo", hint: "Think about mountains and caves", deco: "🌬️" }
 ];
 
-// Fetch sheet data on load
 fetchRiddlesFromSheet();
 
 // ── STATE ──
@@ -1120,7 +1116,6 @@ function startTimer() {
     updateTimerDisplay();
     if (timeLeft <= 0) {
       clearInterval(timerInterval);
-      // Auto-reveal on timeout
       showAnswerOverlay("Time's up! The answer was...");
     }
   }, 1000);
@@ -1155,9 +1150,7 @@ function showAnswerOverlay(title) {
 }
 
 function closeAnswer(e) {
-  if (e.target === document.getElementById('answer-overlay')) {
-    // do nothing — must use button
-  }
+  // Must use button to close
 }
 
 function nextRiddle() {
@@ -1200,6 +1193,7 @@ function playAgain() {
 }
 
 function goToActivity() {
+  clearInterval(timerInterval);
   showScreen('activity-screen');
 }
 
@@ -1239,12 +1233,16 @@ function initSnakeCanvas() {
 }
 
 function loadSnakeHiScore() {
-  const hi = localStorage.getItem('brainsprout_snake_hi') || 0;
-  document.getElementById('snake-hi').textContent = hi;
+  try {
+    const hi = localStorage.getItem('brainsprout_snake_hi') || 0;
+    document.getElementById('snake-hi').textContent = hi;
+  } catch(e) {}
 }
 
 function clearHighScore() {
-  localStorage.removeItem('brainsprout_snake_hi');
+  try {
+    localStorage.removeItem('brainsprout_snake_hi');
+  } catch(e) {}
   document.getElementById('snake-hi').textContent = 0;
 }
 
@@ -1390,10 +1388,11 @@ class SnakeGame {
 
   gameOver() {
     this.running = false;
-    const hi = parseInt(localStorage.getItem('brainsprout_snake_hi') || 0);
+    let hi = 0;
+    try { hi = parseInt(localStorage.getItem('brainsprout_snake_hi') || 0); } catch(e) {}
     const isNew = this.score > hi;
     if (isNew) {
-      localStorage.setItem('brainsprout_snake_hi', this.score);
+      try { localStorage.setItem('brainsprout_snake_hi', this.score); } catch(e) {}
       document.getElementById('snake-hi').textContent = this.score;
     }
     const overlay = document.getElementById('snake-overlay');
