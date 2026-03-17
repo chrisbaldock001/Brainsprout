@@ -34,7 +34,7 @@ font-family: 'Nunito', sans-serif;
 background: var(–bg);
 min-height: 100vh;
 overflow-x: hidden;
-color: var(–text-dark);
+color: var(--text-dark);
 }
 
 /* ── SCREENS ── */
@@ -111,7 +111,7 @@ line-height: 1;
 }
 .app-tagline {
 font-size: 15px;
-color: var(–text-light);
+color: var(--text-light);
 font-weight: 600;
 margin-bottom: 36px;
 letter-spacing: 0.5px;
@@ -119,10 +119,10 @@ letter-spacing: 0.5px;
 
 .name-card {
 background: white;
-border-radius: var(–radius);
+border-radius: var(--radius);
 padding: 32px;
 width: 100%;
-box-shadow: var(–shadow);
+box-shadow: var(--shadow);
 display: flex;
 flex-direction: column;
 gap: 16px;
@@ -131,23 +131,23 @@ gap: 16px;
 .name-card label {
 font-size: 18px;
 font-weight: 800;
-color: var(–text-dark);
+color: var(--text-dark);
 }
 
 .name-card input {
-border: 2.5px solid var(–teal-light);
+border: 2.5px solid var(--teal-light);
 border-radius: 14px;
 padding: 14px 18px;
 font-size: 18px;
 font-weight: 700;
-color: var(–text-dark);
+color: var(--text-dark);
 outline: none;
 transition: border-color 0.2s, box-shadow 0.2s;
-background: var(–teal-pale);
+background: var(--teal-pale);
 }
 .name-card input::placeholder { color: var(–text-light); font-weight: 600; }
 .name-card input:focus {
-border-color: var(–teal);
+border-color: var(--teal);
 box-shadow: 0 0 0 4px rgba(77,191,184,0.15);
 }
 
@@ -172,7 +172,7 @@ box-shadow: 0 6px 20px rgba(255,127,110,0.4);
 .btn-coral:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(255,127,110,0.45); }
 
 .btn-teal {
-background: var(–teal);
+background: var(--teal);
 color: white;
 box-shadow: 0 6px 20px rgba(77,191,184,0.4);
 }
@@ -180,11 +180,11 @@ box-shadow: 0 6px 20px rgba(77,191,184,0.4);
 
 .btn-outline {
 background: white;
-color: var(–text-mid);
+color: var(--text-mid);
 border: 2.5px solid #E0ECEB;
 box-shadow: none;
 }
-.btn-outline:hover { background: var(–teal-pale); border-color: var(–teal-light); }
+.btn-outline:hover { background: var(--teal-pale); border-color: var(--teal-light); }
 
 .btn-full { width: 100%; }
 
@@ -212,7 +212,7 @@ gap: 8px;
 .greeting {
 font-family: 'Fredoka One', sans-serif;
 font-size: 32px;
-color: var(–text-dark);
+color: var(--text-dark);
 text-align: center;
 margin-bottom: 8px;
 }
@@ -220,7 +220,7 @@ margin-bottom: 8px;
 
 .activity-subtitle {
 font-size: 15px;
-color: var(–text-light);
+color: var(--text-light);
 font-weight: 600;
 margin-bottom: 32px;
 }
@@ -263,7 +263,7 @@ color: var(–teal);
 
 .activity-card-desc {
 font-size: 14px;
-color: var(–text-light);
+color: var(--text-light);
 font-weight: 600;
 text-align: center;
 }
@@ -315,8 +315,8 @@ border-radius: 50%;
 background: var(--teal-light);
 transition: background 0.3s, transform 0.3s;
 }
-.progress-dot.done { background: var(–teal); transform: scale(1.2); }
-.progress-dot.current { background: var(–coral); transform: scale(1.3); box-shadow: 0 0 0 3px var(–coral-pale); }
+.progress-dot.done { background: var(--teal); transform: scale(1.2); }
+.progress-dot.current { background: var(--coral); transform: scale(1.3); box-shadow: 0 0 0 3px var(--coral-pale); }
 
 .timer-wrap {
 display: flex;
@@ -593,7 +593,7 @@ position: relative;
 .score-label {
 font-size: 10px;
 font-weight: 800;
-color: var(–text-light);
+color: var(--text-light);
 text-transform: uppercase;
 letter-spacing: 1px;
 }
@@ -604,7 +604,7 @@ font-size: 22px;
 color: var(–teal);
 }
 
-.score-box-hi .score-val { color: var(–coral); }
+.score-box-hi .score-val { color: var(--coral); }
 
 .clear-btn {
 position: absolute;
@@ -620,7 +620,7 @@ line-height: 1;
 border-radius: 50%;
 transition: color 0.2s, background 0.2s;
 }
-.clear-btn:hover { color: var(–coral); background: var(–coral-pale); }
+.clear-btn:hover { color: var(--coral); background: var(--coral-pale); }
 
 .canvas-wrap {
 position: relative;
@@ -661,8 +661,8 @@ padding: 24px;
 }
 
 .snake-overlay-emoji { font-size: 48px; animation: float 2s ease-in-out infinite; }
-.snake-overlay-title { font-family: ‘Fredoka One’, cursive; font-size: 28px; color: var(–text-dark); }
-.snake-overlay-sub { font-size: 14px; font-weight: 600; color: var(–text-light); margin-bottom: 8px; }
+.snake-overlay-title { font-family: 'Fredoka-One', sans-serif; font-size: 28px; color: var(--text-dark); }
+.snake-overlay-sub { font-size: 14px; font-weight: 600; color: var(--text-light); margin-bottom: 8px; }
 
 /* D-Pad */
 .dpad {
@@ -697,7 +697,7 @@ font-weight: 900;
 -webkit-tap-highlight-color: transparent;
 user-select: none;
 }
-.dpad-btn:active { transform: scale(0.9); background: var(–teal-pale); }
+.dpad-btn:active { transform: scale(0.9); background: var(--teal-pale); }
 
 .dpad-center {
 width: 60px;
