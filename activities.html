@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brainsprout — Activities</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .page {
+      background: linear-gradient(160deg, #FFF8F6 0%, #EEFCFB 60%, #F5F8FF 100%);
+      justify-content: center;
+      padding: 40px 24px;
+    }
+
+    .blob-1 { width: 280px; height: 280px; background: var(--teal-light); opacity: 0.35; top: -60px; left: -60px; }
+    .blob-2 { width: 200px; height: 200px; background: var(--coral-light); opacity: 0.3; bottom: 60px; right: -50px; }
+
+    .activity-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 480px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      margin-top: 40px;
+    }
+
+    .greeting {
+      font-family: 'Fredoka One', sans-serif;
+      font-size: 32px;
+      color: var(--text-dark);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .greeting span { color: var(--coral); }
+
+    .activity-subtitle {
+      font-size: 15px;
+      color: var(--text-light);
+      font-weight: 600;
+      margin-bottom: 32px;
+    }
+
+    .activity-btn-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .activity-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      width: 100%;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 2.5px solid transparent;
+      text-decoration: none;
+    }
+    .activity-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 48px rgba(77,191,184,0.2);
+      border-color: var(--teal-light);
+    }
+
+    .activity-card-icon { font-size: 44px; }
+
+    .activity-card-title {
+      font-family: 'Fredoka One', sans-serif;
+      font-size: 26px;
+      color: var(--teal);
+    }
+
+    .activity-card-title.coral { color: var(--coral); }
+
+    .activity-card-desc {
+      font-size: 14px;
+      color: var(--text-light);
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .completed-badge {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--teal);
+      background: var(--teal-pale);
+      padding: 6px 14px;
+      border-radius: 50px;
+      display: none;
+      align-items: center;
+      gap: 6px;
+    }
+    .completed-badge.show { display: flex; }
+
+    /* Reset button */
+    .reset-btn {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      background: white;
+      border: 2px solid #E0ECEB;
+      border-radius: 50px;
+      padding: 8px 14px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text-light);
+      cursor: pointer;
+      z-index: 10;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .reset-btn:hover { color: var(--coral); border-color: var(--coral-light); background: var(--coral-pale); }
+
+    @media (max-width: 400px) {
+      .greeting { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <div class="activity-inner">
+      <div class="illus-row" style="margin-bottom:16px;">
+        <svg width="48" height="48" viewBox="0 0 72 72" class="illus">
+          <ellipse cx="36" cy="44" rx="18" ry="14" fill="#B8E8C8"/>
+          <circle cx="24" cy="30" r="7" fill="#B8E8C8"/>
+          <circle cx="48" cy="30" r="7" fill="#B8E8C8"/>
+          <circle cx="24" cy="29" r="4" fill="white"/>
+          <circle cx="48" cy="29" r="4" fill="white"/>
+          <circle cx="25" cy="29" r="2" fill="#2D3B36"/>
+          <circle cx="49" cy="29" r="2" fill="#2D3B36"/>
+          <path d="M29 48 Q36 54 43 48" stroke="#4A8A5A" stroke-width="2" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+
+      <h2 class="greeting">Hello, <span id="player-name">friend</span>! 👋</h2>
+      <p class="activity-subtitle">What are we playing today?</p>
+
+      <div class="activity-btn-wrap">
+        <a class="activity-card" href="riddles.html">
+          <div class="activity-card-icon">🧩</div>
+          <div class="activity-card-title">Riddles</div>
+          <div class="activity-card-desc">7 brain-bending riddles. Think fast.</div>
+        </a>
+
+        <div class="completed-badge" id="riddles-badge">
+          ✅ <span id="rounds-count">1</span> riddle challenge<span id="rounds-plural">s</span> completed
+        </div>
+
+        <a class="activity-card" href="snake.html" style="margin-top:4px;">
+          <div class="activity-card-icon">🐍</div>
+          <div class="activity-card-title coral">Snake</div>
+          <div class="activity-card-desc">The classic Nokia game. Try not to eat yourself.</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="utils.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Guard: if no name, send back to index
+      const name = getPlayerName();
+      if (!name) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      document.getElementById('player-name').textContent = name;
+
+      // Show rounds badge if any completed
+      const rounds = getRoundsCompleted();
+      if (rounds > 0) {
+        document.getElementById('rounds-count').textContent = rounds;
+        document.getElementById('rounds-plural').textContent = rounds === 1 ? '' : 's';
+        document.getElementById('riddles-badge').classList.add('show');
+      }
+    });
+  </script>
+</body>
+</html>

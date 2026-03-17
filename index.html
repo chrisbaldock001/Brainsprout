@@ -1,1407 +1,217 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brainsprout 🌿</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --coral: #FF7F6E;
-    --coral-light: #FFB3A7;
-    --coral-pale: #FFF0EE;
-    --teal: #4DBFB8;
-    --teal-light: #A8E6E3;
-    --teal-pale: #EEFAF9;
-    --mint: #B8E8C8;
-    --lavender: #C9C3E8;
-    --butter: #FFE8A3;
-    --peach: #FFDAB3;
-    --bg: #FAFDF9;
-    --text-dark: #2D3B36;
-    --text-mid: #5A7268;
-    --text-light: #8AADA4;
-    --radius: 24px;
-    --shadow: 0 8px 32px rgba(77,191,184,0.15);
-    --shadow-coral: 0 8px 32px rgba(255,127,110,0.2);
-  }
-
-- { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-font-family: 'Nunito', sans-serif;
-background: var(–bg);
-min-height: 100vh;
-overflow-x: hidden;
-color: var(--text-dark);
-}
-
-/* ── SCREENS ── */
-.screen {
-display: none;
-min-height: 100vh;
-position: relative;
-overflow: hidden;
-}
-.screen.active { display: flex; flex-direction: column; align-items: center; }
-
-/* ── BACKGROUND BLOBS ── */
-.blob {
-position: absolute;
-border-radius: 50%;
-filter: blur(60px);
-pointer-events: none;
-z-index: 0;
-}
-
-/* ── START SCREEN ── */
-#start-screen {
-background: linear-gradient(160deg, #FFF8F6 0%, #EEFCFB 60%, #F5F8FF 100%);
-justify-content: center;
-padding: 40px 24px;
-}
-
-#start-screen .blob-1 { width: 300px; height: 300px; background: var(–coral-light); opacity: 0.4; top: -80px; right: -60px; }
-#start-screen .blob-2 { width: 250px; height: 250px; background: var(–teal-light); opacity: 0.35; bottom: 40px; left: -80px; }
-#start-screen .blob-3 { width: 180px; height: 180px; background: var(–butter); opacity: 0.5; top: 50%; left: 50%; transform: translate(-50%,-50%); }
-
-.start-inner {
-position: relative;
-z-index: 1;
-display: flex;
-flex-direction: column;
-align-items: center;
-max-width: 480px;
-width: 100%;
-gap: 0;
-}
-
-/* SVG Illustrations */
-.illus-row {
-display: flex;
-justify-content: center;
-gap: 16px;
-margin-bottom: 24px;
-flex-wrap: wrap;
-}
-
-.illus {
-width: 72px;
-height: 72px;
-animation: float 3s ease-in-out infinite;
-}
-.illus:nth-child(2) { animation-delay: 0.5s; }
-.illus:nth-child(3) { animation-delay: 1s; }
-.illus:nth-child(4) { animation-delay: 1.5s; }
-
-@keyframes float {
-0%, 100% { transform: translateY(0px); }
-50% { transform: translateY(-8px); }
-}
-
-.app-logo {
-font-family: 'Fredoka One', sans-serif;
-font-size: 48px;
-color: var(--coral);
-letter-spacing: -1px;
-margin-bottom: 6px;
-text-align: center;
-line-height: 1;
-}
-.app-tagline {
-font-size: 15px;
-color: var(--text-light);
-font-weight: 600;
-margin-bottom: 36px;
-letter-spacing: 0.5px;
-}
-
-.name-card {
-background: white;
-border-radius: var(--radius);
-padding: 32px;
-width: 100%;
-box-shadow: var(--shadow);
-display: flex;
-flex-direction: column;
-gap: 16px;
-}
-
-.name-card label {
-font-size: 18px;
-font-weight: 800;
-color: var(--text-dark);
-}
-
-.name-card input {
-border: 2.5px solid var(--teal-light);
-border-radius: 14px;
-padding: 14px 18px;
-font-size: 18px;
-font-weight: 700;
-color: var(--text-dark);
-outline: none;
-transition: border-color 0.2s, box-shadow 0.2s;
-background: var(--teal-pale);
-}
-.name-card input::placeholder { color: var(–text-light); font-weight: 600; }
-.name-card input:focus {
-border-color: var(--teal);
-box-shadow: 0 0 0 4px rgba(77,191,184,0.15);
-}
-
-/* ── BUTTONS ── */
-.btn {
-font-weight: 800;
-font-size: 17px;
-border: none;
-border-radius: 50px;
-padding: 14px 32px;
-cursor: pointer;
-transition: transform 0.15s, box-shadow 0.15s;
-letter-spacing: 0.3px;
-}
-.btn:active { transform: scale(0.96); }
-
-.btn-coral {
-background: var(--coral);
-color: white;
-box-shadow: 0 6px 20px rgba(255,127,110,0.4);
-}
-.btn-coral:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(255,127,110,0.45); }
-
-.btn-teal {
-background: var(--teal);
-color: white;
-box-shadow: 0 6px 20px rgba(77,191,184,0.4);
-}
-.btn-teal:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(77,191,184,0.45); }
-
-.btn-outline {
-background: white;
-color: var(--text-mid);
-border: 2.5px solid #E0ECEB;
-box-shadow: none;
-}
-.btn-outline:hover { background: var(--teal-pale); border-color: var(--teal-light); }
-
-.btn-full { width: 100%; }
-
-/* ── ACTIVITY SCREEN ── */
-#activity-screen {
-background: linear-gradient(160deg, #FFF8F6 0%, #EEFCFB 60%, #F5F8FF 100%);
-justify-content: center;
-padding: 40px 24px;
-}
-
-#activity-screen .blob-1 { width: 280px; height: 280px; background: var(–teal-light); opacity: 0.35; top: -60px; left: -60px; }
-#activity-screen .blob-2 { width: 200px; height: 200px; background: var(–coral-light); opacity: 0.3; bottom: 60px; right: -50px; }
-
-.activity-inner {
-position: relative;
-z-index: 1;
-max-width: 480px;
-width: 100%;
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 8px;
-}
-
-.greeting {
-font-family: 'Fredoka One', sans-serif;
-font-size: 32px;
-color: var(--text-dark);
-text-align: center;
-margin-bottom: 8px;
-}
-.greeting span { color: var(--coral); }
-
-.activity-subtitle {
-font-size: 15px;
-color: var(--text-light);
-font-weight: 600;
-margin-bottom: 32px;
-}
-
-.activity-btn-wrap {
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 8px;
-width: 100%;
-}
-
-.activity-card {
-background: white;
-border-radius: var(--radius);
-padding: 28px 32px;
-width: 100%;
-box-shadow: var(--shadow);
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 16px;
-cursor: pointer;
-transition: transform 0.2s, box-shadow 0.2s;
-border: 2.5px solid transparent;
-}
-.activity-card:hover {
-transform: translateY(-3px);
-box-shadow: 0 16px 48px rgba(77,191,184,0.2);
-border-color: var(--teal-light);
-}
-
-.activity-card-icon { font-size: 44px; }
-
-.activity-card-title {
-font-family: 'Fredoka One', sans-serif;
-font-size: 26px;
-color: var(–teal);
-}
-
-.activity-card-desc {
-font-size: 14px;
-color: var(--text-light);
-font-weight: 600;
-text-align: center;
-}
-
-.completed-badge {
-font-size: 13px;
-font-weight: 700;
-color: var(–teal);
-background: var(--teal-pale);
-padding: 6px 14px;
-border-radius: 50px;
-display: none;
-align-items: center;
-gap: 6px;
-}
-.completed-badge.show { display: flex; }
-
-/* ── RIDDLE SCREEN ── */
-#riddle-screen {
-background: linear-gradient(180deg, #EEFCFB 0%, #FFF8F6 100%);
-padding: 0;
-justify-content: flex-start;
-}
-
-.riddle-header {
-width: 100%;
-padding: 20px 24px 16px;
-display: flex;
-align-items: center;
-justify-content: space-between;
-position: relative;
-z-index: 2;
-background: rgba(255,255,255,0.7);
-backdrop-filter: blur(8px);
-border-bottom: 1px solid rgba(77,191,184,0.15);
-}
-
-.progress-wrap {
-display: flex;
-align-items: center;
-gap: 6px;
-flex: 1;
-}
-
-.progress-dot {
-width: 10px;
-height: 10px;
-border-radius: 50%;
-background: var(--teal-light);
-transition: background 0.3s, transform 0.3s;
-}
-.progress-dot.done { background: var(--teal); transform: scale(1.2); }
-.progress-dot.current { background: var(--coral); transform: scale(1.3); box-shadow: 0 0 0 3px var(--coral-pale); }
-
-.timer-wrap {
-display: flex;
-align-items: center;
-gap: 8px;
-background: white;
-border-radius: 50px;
-padding: 8px 16px;
-box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-margin-left: 16px;
-}
-
-.timer-num {
-font-family: 'Fredoka One', sans-serif;
-font-size: 22px;
-color: var(--coral);
-min-width: 28px;
-text-align: center;
-transition: color 0.3s;
-}
-.timer-num.urgent { color: #FF4444; animation: pulse 0.5s ease-in-out infinite; }
-@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); } }
-
-.timer-icon { font-size: 18px; }
-
-.riddle-body {
-flex: 1;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-padding: 32px 24px 24px;
-width: 100%;
-max-width: 560px;
-margin: 0 auto;
-gap: 24px;
-position: relative;
-z-index: 1;
-}
-
-.riddle-num {
-font-size: 13px;
-font-weight: 700;
-color: var(--text-light);
-letter-spacing: 1px;
-text-transform: uppercase;
-}
-
-.riddle-card {
-background: white;
-border-radius: 28px;
-padding: 36px 32px;
-width: 100%;
-box-shadow: 0 12px 48px rgba(77,191,184,0.12), 0 2px 8px rgba(0,0,0,0.04);
-text-align: center;
-position: relative;
-border: 2px solid rgba(77,191,184,0.1);
-}
-
-.riddle-deco {
-font-size: 36px;
-margin-bottom: 16px;
-display: block;
-}
-
-.riddle-text {
-font-family: 'Fredoka One', sans-serif;
-font-size: 22px;
-color: var(--text-dark);
-line-height: 1.4;
-letter-spacing: -0.3px;
-}
-
-.riddle-actions {
-display: flex;
-flex-direction: column;
-gap: 12px;
-width: 100%;
-}
-
-.btn-hint {
-background: var(--butter);
-color: #8A6A00;
-font-size: 15px;
-padding: 12px 24px;
-border-radius: 50px;
-border: none;
-font-weight: 800;
-cursor: pointer;
-transition: transform 0.15s, background 0.15s;
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 8px;
-}
-.btn-hint:hover { background: #FFD970; transform: translateY(-1px); }
-
-/* ── HINT OVERLAY ── */
-.overlay {
-display: none;
-position: fixed;
-inset: 0;
-background: rgba(45,59,54,0.5);
-backdrop-filter: blur(4px);
-z-index: 100;
-align-items: flex-end;
-justify-content: center;
-padding: 24px;
-}
-.overlay.show { display: flex; animation: fadeIn 0.2s ease; }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-.overlay-card {
-background: white;
-border-radius: 28px;
-padding: 32px;
-width: 100%;
-max-width: 480px;
-text-align: center;
-animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-display: flex;
-flex-direction: column;
-gap: 16px;
-}
-@keyframes slideUp { from { transform: translateY(60px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-.overlay-title {
-font-family: ‘Fredoka One’, sans-serif;
-font-size: 22px;
-color: var(--coral);
-}
-
-.overlay-hint {
-font-size: 17px;
-font-weight: 700;
-color: var(–text-dark);
-line-height: 1.5;
-}
-
-/* ── CELEBRATION SCREEN ── */
-#celebration-screen {
-background: linear-gradient(160deg, #FFF8F6 0%, #EEFCFB 60%, #F0F4FF 100%);
-justify-content: center;
-padding: 40px 24px;
-position: relative;
-}
-
-.confetti-container {
-position: absolute;
-inset: 0;
-pointer-events: none;
-overflow: hidden;
-z-index: 0;
-}
-
-.confetti-piece {
-position: absolute;
-width: 10px;
-height: 10px;
-border-radius: 2px;
-animation: confettiFall linear forwards;
-}
-
-@keyframes confettiFall {
-0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
-100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
-}
-
-.celeb-inner {
-position: relative;
-z-index: 1;
-display: flex;
-flex-direction: column;
-align-items: center;
-max-width: 480px;
-width: 100%;
-gap: 8px;
-}
-
-.celeb-emoji { font-size: 72px; margin-bottom: 8px; animation: bounce 0.6s ease-in-out; }
-@keyframes bounce { 0%,100% { transform: scale(1); } 50% { transform: scale(1.2); } }
-
-.celeb-title {
-font-family: ‘Fredoka One’, sans-serif;
-font-size: 40px;
-color: var(--coral);
-text-align: center;
-line-height: 1.1;
-margin-bottom: 8px;
-}
-
-.celeb-subtitle {
-font-size: 16px;
-font-weight: 700;
-color: var(–text-mid);
-text-align: center;
-margin-bottom: 32px;
-}
-
-.celeb-actions {
-display: flex;
-flex-direction: column;
-gap: 12px;
-width: 100%;
-}
-
-/* ── TRANSITIONS ── */
-.screen { animation: none; }
-.screen.entering { animation: screenIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
-@keyframes screenIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
-
-/* ── LOADING ── */
-.loading-wrap {
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 16px;
-padding: 60px 24px;
-}
-.loading-spinner {
-width: 48px;
-height: 48px;
-border: 4px solid var(–teal-light);
-border-top-color: var(–teal);
-border-radius: 50%;
-animation: spin 0.8s linear infinite;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-
-/* ── SNAKE SCREEN ── */
-#snake-screen {
-background: linear-gradient(160deg, #EEFCFB 0%, #FFF8F6 100%);
-justify-content: flex-start;
-padding: 0;
-}
-
-.snake-inner {
-display: flex;
-flex-direction: column;
-align-items: center;
-width: 100%;
-max-width: 480px;
-margin: 0 auto;
-padding: 20px 16px 24px;
-gap: 16px;
-position: relative;
-z-index: 1;
-}
-
-.snake-header {
-display: flex;
-align-items: center;
-justify-content: space-between;
-width: 100%;
-}
-
-.snake-scores {
-display: flex;
-gap: 10px;
-}
-
-.score-box {
-background: white;
-border-radius: 16px;
-padding: 8px 16px;
-text-align: center;
-box-shadow: var(–shadow);
-min-width: 64px;
-position: relative;
-}
-
-.score-box-hi { padding-right: 28px; }
-
-.score-label {
-font-size: 10px;
-font-weight: 800;
-color: var(--text-light);
-text-transform: uppercase;
-letter-spacing: 1px;
-}
-
-.score-val {
-font-family: 'Fredoka One', sans-serif;
-font-size: 22px;
-color: var(–teal);
-}
-
-.score-box-hi .score-val { color: var(--coral); }
-
-.clear-btn {
-position: absolute;
-top: 4px;
-right: 5px;
-background: none;
-border: none;
-font-size: 10px;
-color: var(–text-light);
-cursor: pointer;
-padding: 2px;
-line-height: 1;
-border-radius: 50%;
-transition: color 0.2s, background 0.2s;
-}
-.clear-btn:hover { color: var(--coral); background: var(--coral-pale); }
-
-.canvas-wrap {
-position: relative;
-border-radius: 20px;
-overflow: hidden;
-box-shadow: 0 12px 48px rgba(77,191,184,0.18), 0 2px 8px rgba(0,0,0,0.06);
-border: 3px solid rgba(77,191,184,0.2);
-width: min(340px, calc(100vw - 32px));
-height: min(340px, calc(100vw - 32px));
-}
-
-#snake-canvas {
-display: block;
-width: 100%;
-height: 100%;
-background: #F0FAF9;
-}
-
-.snake-overlay {
-position: absolute;
-inset: 0;
-background: rgba(238,250,249,0.94);
-display: flex;
-align-items: center;
-justify-content: center;
-backdrop-filter: blur(4px);
-transition: opacity 0.3s;
-}
-.snake-overlay.hidden { display: none; }
-
-.snake-overlay-content {
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 8px;
-text-align: center;
-padding: 24px;
-}
-
-.snake-overlay-emoji { font-size: 48px; animation: float 2s ease-in-out infinite; }
-.snake-overlay-title { font-family: 'Fredoka-One', sans-serif; font-size: 28px; color: var(--text-dark); }
-.snake-overlay-sub { font-size: 14px; font-weight: 600; color: var(--text-light); margin-bottom: 8px; }
-
-/* D-Pad */
-.dpad {
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 4px;
-margin-top: 4px;
-}
-
-.dpad-row {
-display: flex;
-align-items: center;
-gap: 4px;
-}
-
-.dpad-btn {
-width: 60px;
-height: 60px;
-border-radius: 16px;
-background: white;
-border: 2.5px solid var(--teal-light);
-font-size: 20px;
-cursor: pointer;
-box-shadow: 0 4px 12px rgba(77,191,184,0.2);
-transition: transform 0.1s, background 0.1s;
-display: flex;
-align-items: center;
-justify-content: center;
-color: var(–teal);
-font-weight: 900;
--webkit-tap-highlight-color: transparent;
-user-select: none;
-}
-.dpad-btn:active { transform: scale(0.9); background: var(--teal-pale); }
-
-.dpad-center {
-width: 60px;
-height: 60px;
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 22px;
-}
-
-/* Responsive */
-@media (max-width: 400px) {
-.app-logo { font-size: 38px; }
-.riddle-text { font-size: 18px; }
-.celeb-title { font-size: 32px; }
-.dpad-btn { width: 52px; height: 52px; }
-}
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brainsprout 🌿</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .page {
+      background: linear-gradient(160deg, #FFF8F6 0%, #EEFCFB 60%, #F5F8FF 100%);
+      justify-content: center;
+      padding: 40px 24px;
+    }
+
+    .blob-1 { width: 300px; height: 300px; background: var(--coral-light); opacity: 0.4; top: -80px; right: -60px; }
+    .blob-2 { width: 250px; height: 250px; background: var(--teal-light); opacity: 0.35; bottom: 40px; left: -80px; }
+    .blob-3 { width: 180px; height: 180px; background: var(--butter); opacity: 0.5; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+
+    .start-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 480px;
+      width: 100%;
+    }
+
+    .app-logo {
+      font-family: 'Fredoka One', sans-serif;
+      font-size: 48px;
+      color: var(--coral);
+      letter-spacing: -1px;
+      margin-bottom: 6px;
+      text-align: center;
+      line-height: 1;
+    }
+
+    .app-tagline {
+      font-size: 15px;
+      color: var(--text-light);
+      font-weight: 600;
+      margin-bottom: 36px;
+      letter-spacing: 0.5px;
+    }
+
+    .name-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 32px;
+      width: 100%;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .name-card label {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    .name-card input {
+      border: 2.5px solid var(--teal-light);
+      border-radius: 14px;
+      padding: 14px 18px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      background: var(--teal-pale);
+    }
+    .name-card input::placeholder { color: var(--text-light); font-weight: 600; }
+    .name-card input:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 4px rgba(77,191,184,0.15);
+    }
+
+    /* Reset button — top right, index only */
+    .reset-btn-index {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      background: white;
+      border: 2px solid #E0ECEB;
+      border-radius: 50px;
+      padding: 8px 14px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text-light);
+      cursor: pointer;
+      z-index: 10;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+      display: none;
+    }
+    .reset-btn-index:hover { color: var(--coral); border-color: var(--coral-light); background: var(--coral-pale); }
+    .reset-btn-index.visible { display: block; }
+
+    @media (max-width: 400px) {
+      .app-logo { font-size: 38px; }
+    }
+  </style>
 </head>
 <body>
+  <button class="reset-btn-index" id="reset-btn" onclick="handleReset()" title="Start over">↺ Reset</button>
 
-<!-- ══════════════ START SCREEN ══════════════ -->
+  <div class="page">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
 
-<div id="start-screen" class="screen active">
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-  <div class="blob blob-3"></div>
+    <div class="start-inner">
+      <div class="illus-row">
+        <!-- Snail -->
+        <svg class="illus" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="40" cy="36" r="18" fill="#FFDAB3" stroke="#FFB37A" stroke-width="2"/>
+          <path d="M40 26 Q50 26 50 36 Q50 46 40 46 Q30 46 30 36 Q30 26 40 26Z" fill="#FFB37A" opacity="0.4"/>
+          <circle cx="40" cy="36" r="8" fill="#FF8C5A" opacity="0.3"/>
+          <ellipse cx="24" cy="46" rx="14" ry="8" fill="#A8E6E3"/>
+          <circle cx="16" cy="44" r="3" fill="#4DBFB8"/>
+          <line x1="16" y1="44" x2="14" y2="38" stroke="#4DBFB8" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="16" y1="44" x2="18" y2="38" stroke="#4DBFB8" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="14" cy="37" r="2" fill="#2D8A84"/>
+          <circle cx="18" cy="37" r="2" fill="#2D8A84"/>
+        </svg>
+        <!-- Mushroom -->
+        <svg class="illus" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="30" y="42" width="12" height="16" rx="4" fill="#FFE8A3"/>
+          <ellipse cx="36" cy="42" rx="20" ry="14" fill="#FF7F6E"/>
+          <circle cx="28" cy="36" r="4" fill="white" opacity="0.7"/>
+          <circle cx="40" cy="32" r="5" fill="white" opacity="0.7"/>
+          <circle cx="48" cy="38" r="3" fill="white" opacity="0.7"/>
+          <ellipse cx="36" cy="56" rx="10" ry="3" fill="#E8D88A" opacity="0.5"/>
+        </svg>
+        <!-- Frog -->
+        <svg class="illus" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="36" cy="44" rx="18" ry="14" fill="#B8E8C8"/>
+          <circle cx="24" cy="30" r="7" fill="#B8E8C8"/>
+          <circle cx="48" cy="30" r="7" fill="#B8E8C8"/>
+          <circle cx="24" cy="29" r="4" fill="white"/>
+          <circle cx="48" cy="29" r="4" fill="white"/>
+          <circle cx="25" cy="29" r="2" fill="#2D3B36"/>
+          <circle cx="49" cy="29" r="2" fill="#2D3B36"/>
+          <path d="M29 48 Q36 54 43 48" stroke="#4A8A5A" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <path d="M18 56 Q14 62 10 60" stroke="#B8E8C8" stroke-width="3" stroke-linecap="round"/>
+          <path d="M54 56 Q58 62 62 60" stroke="#B8E8C8" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <!-- Flower -->
+        <svg class="illus" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="36" y1="60" x2="36" y2="36" stroke="#B8E8C8" stroke-width="3" stroke-linecap="round"/>
+          <path d="M36 28 C36 20 26 18 26 28 C26 36 36 36 36 36 C36 36 46 36 46 28 C46 18 36 20 36 28Z" fill="#FFB3A7"/>
+          <circle cx="28" cy="30" r="6" fill="#FFDAB3"/>
+          <circle cx="44" cy="30" r="6" fill="#FFDAB3"/>
+          <circle cx="36" cy="24" r="6" fill="#FFDAB3"/>
+          <circle cx="36" cy="36" r="6" fill="#FFDAB3"/>
+          <circle cx="36" cy="30" r="7" fill="#FF7F6E"/>
+          <circle cx="36" cy="30" r="4" fill="#FFE8A3"/>
+        </svg>
+      </div>
 
-  <div class="start-inner">
-    <div class="illus-row">
-      <!-- Snail -->
-      <svg class="illus" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="40" cy="36" r="18" fill="#FFDAB3" stroke="#FFB37A" stroke-width="2"/>
-        <path d="M40 26 Q50 26 50 36 Q50 46 40 46 Q30 46 30 36 Q30 26 40 26Z" fill="#FFB37A" opacity="0.4"/>
-        <circle cx="40" cy="36" r="8" fill="#FF8C5A" opacity="0.3"/>
-        <ellipse cx="24" cy="46" rx="14" ry="8" fill="#A8E6E3"/>
-        <circle cx="16" cy="44" r="3" fill="#4DBFB8"/>
-        <line x1="16" y1="44" x2="14" y2="38" stroke="#4DBFB8" stroke-width="1.5" stroke-linecap="round"/>
-        <line x1="16" y1="44" x2="18" y2="38" stroke="#4DBFB8" stroke-width="1.5" stroke-linecap="round"/>
-        <circle cx="14" cy="37" r="2" fill="#2D8A84"/>
-        <circle cx="18" cy="37" r="2" fill="#2D8A84"/>
-      </svg>
-      <!-- Mushroom -->
-      <svg class="illus" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="30" y="42" width="12" height="16" rx="4" fill="#FFE8A3"/>
-        <ellipse cx="36" cy="42" rx="20" ry="14" fill="#FF7F6E"/>
-        <circle cx="28" cy="36" r="4" fill="white" opacity="0.7"/>
-        <circle cx="40" cy="32" r="5" fill="white" opacity="0.7"/>
-        <circle cx="48" cy="38" r="3" fill="white" opacity="0.7"/>
-        <ellipse cx="36" cy="56" rx="10" ry="3" fill="#E8D88A" opacity="0.5"/>
-      </svg>
-      <!-- Frog -->
-      <svg class="illus" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="36" cy="44" rx="18" ry="14" fill="#B8E8C8"/>
-        <circle cx="24" cy="30" r="7" fill="#B8E8C8"/>
-        <circle cx="48" cy="30" r="7" fill="#B8E8C8"/>
-        <circle cx="24" cy="29" r="4" fill="white"/>
-        <circle cx="48" cy="29" r="4" fill="white"/>
-        <circle cx="25" cy="29" r="2" fill="#2D3B36"/>
-        <circle cx="49" cy="29" r="2" fill="#2D3B36"/>
-        <path d="M29 48 Q36 54 43 48" stroke="#4A8A5A" stroke-width="2" stroke-linecap="round" fill="none"/>
-        <path d="M18 56 Q14 62 10 60" stroke="#B8E8C8" stroke-width="3" stroke-linecap="round"/>
-        <path d="M54 56 Q58 62 62 60" stroke="#B8E8C8" stroke-width="3" stroke-linecap="round"/>
-      </svg>
-      <!-- Flower -->
-      <svg class="illus" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <line x1="36" y1="60" x2="36" y2="36" stroke="#B8E8C8" stroke-width="3" stroke-linecap="round"/>
-        <path d="M36 28 C36 20 26 18 26 28 C26 36 36 36 36 36 C36 36 46 36 46 28 C46 18 36 20 36 28Z" fill="#FFB3A7"/>
-        <circle cx="28" cy="30" r="6" fill="#FFDAB3"/>
-        <circle cx="44" cy="30" r="6" fill="#FFDAB3"/>
-        <circle cx="36" cy="24" r="6" fill="#FFDAB3"/>
-        <circle cx="36" cy="36" r="6" fill="#FFDAB3"/>
-        <circle cx="36" cy="30" r="7" fill="#FF7F6E"/>
-        <circle cx="36" cy="30" r="4" fill="#FFE8A3"/>
-      </svg>
-    </div>
+      <h1 class="app-logo">🌿 Brainsprout</h1>
+      <p class="app-tagline">Riddles, games &amp; general brain chaos</p>
 
-```
-<h1 class="app-logo">🌿 Brainsprout</h1>
-<p class="app-tagline">Riddles, games &amp; general brain chaos</p>
-
-<div class="name-card">
-  <label for="name-input">What's your name, genius?</label>
-  <input type="text" id="name-input" placeholder="Type your name here..." maxlength="20" autocomplete="off" />
-  <button class="btn btn-coral btn-full" onclick="submitName()">Let's go! 🚀</button>
-</div>
-```
-
-  </div>
-</div>
-
-<!-- ══════════════ ACTIVITY SCREEN ══════════════ -->
-
-<div id="activity-screen" class="screen">
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-
-  <div class="activity-inner" style="margin-top: 40px;">
-    <div class="illus-row" style="margin-bottom:16px;">
-      <svg width="48" height="48" viewBox="0 0 72 72" class="illus"><ellipse cx="36" cy="44" rx="18" ry="14" fill="#B8E8C8"/><circle cx="24" cy="30" r="7" fill="#B8E8C8"/><circle cx="48" cy="30" r="7" fill="#B8E8C8"/><circle cx="24" cy="29" r="4" fill="white"/><circle cx="48" cy="29" r="4" fill="white"/><circle cx="25" cy="29" r="2" fill="#2D3B36"/><circle cx="49" cy="29" r="2" fill="#2D3B36"/><path d="M29 48 Q36 54 43 48" stroke="#4A8A5A" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
-    </div>
-    <h2 class="greeting">Hello, <span id="player-name-display">friend</span>! 👋</h2>
-    <p class="activity-subtitle">What are we playing today?</p>
-
-```
-<div class="activity-btn-wrap">
-  <div class="activity-card" onclick="startRiddles()">
-    <div class="activity-card-icon">🧩</div>
-    <div class="activity-card-title">Riddles</div>
-    <div class="activity-card-desc">7 brain-bending riddles. Think fast.</div>
-  </div>
-  <div class="completed-badge" id="riddles-badge">
-    ✅ <span id="rounds-count">1</span> riddle challenge completed
-  </div>
-  <div class="activity-card" onclick="goToSnake()" style="margin-top:4px;">
-    <div class="activity-card-icon">🐍</div>
-    <div class="activity-card-title" style="color:var(--coral);">Snake</div>
-    <div class="activity-card-desc">The classic Nokia game. Try not to eat yourself.</div>
-  </div>
-</div>
-```
-
-  </div>
-</div>
-
-<!-- ══════════════ SNAKE SCREEN ══════════════ -->
-
-<div id="snake-screen" class="screen">
-  <div class="blob blob-1" style="background:var(--teal-light);opacity:0.3;width:250px;height:250px;top:-60px;right:-60px;"></div>
-  <div class="blob blob-2" style="background:var(--coral-light);opacity:0.25;width:200px;height:200px;bottom:40px;left:-60px;"></div>
-
-  <div class="snake-inner">
-    <div class="snake-header">
-      <button class="btn btn-outline" style="padding:8px 18px;font-size:13px;" onclick="goToActivity()">← Back</button>
-      <div class="snake-scores">
-        <div class="score-box">
-          <div class="score-label">Score</div>
-          <div class="score-val" id="snake-score">0</div>
-        </div>
-        <div class="score-box score-box-hi">
-          <div class="score-label">Best</div>
-          <div class="score-val" id="snake-hi">0</div>
-          <button class="clear-btn" onclick="clearHighScore()" title="Clear high score">✕</button>
-        </div>
+      <div class="name-card">
+        <label for="name-input">What's your name, genius?</label>
+        <input type="text" id="name-input" placeholder="Type your name here..." maxlength="20" autocomplete="off" />
+        <button class="btn btn-coral btn-full" onclick="submitName()">Let's go! 🚀</button>
       </div>
     </div>
-
-```
-<div class="canvas-wrap">
-  <canvas id="snake-canvas"></canvas>
-  <div class="snake-overlay" id="snake-overlay">
-    <div class="snake-overlay-content">
-      <div class="snake-overlay-emoji" id="overlay-emoji">🐍</div>
-      <div class="snake-overlay-title" id="overlay-title">Snake</div>
-      <div class="snake-overlay-sub" id="overlay-sub">Use arrow keys or buttons below</div>
-      <button class="btn btn-teal" id="overlay-btn" onclick="startSnakeGame()">Play 🎮</button>
-    </div>
-  </div>
-</div>
-
-<div class="dpad">
-  <div class="dpad-row">
-    <button class="dpad-btn" onclick="snakeDir('UP')">▲</button>
-  </div>
-  <div class="dpad-row">
-    <button class="dpad-btn" onclick="snakeDir('LEFT')">◀</button>
-    <div class="dpad-center">🌿</div>
-    <button class="dpad-btn" onclick="snakeDir('RIGHT')">▶</button>
-  </div>
-  <div class="dpad-row">
-    <button class="dpad-btn" onclick="snakeDir('DOWN')">▼</button>
-  </div>
-</div>
-```
-
-  </div>
-</div>
-
-<!-- ══════════════ RIDDLE SCREEN ══════════════ -->
-
-<div id="riddle-screen" class="screen">
-  <div class="riddle-header">
-     <button class="btn btn-outline" style="padding:8px 18px;font-size:13px;" onclick="goToActivity()">← Back</button>
-    <div class="progress-wrap" id="progress-dots"></div>
-    <div class="timer-wrap">
-      <span class="timer-icon">⏱️</span>
-      <span class="timer-num" id="timer-display">30</span>
-    </div>
   </div>
 
-  <div class="riddle-body">
-    <div class="riddle-num" id="riddle-num">Riddle 1 of 7</div>
-    <div class="riddle-card">
-      <span class="riddle-deco" id="riddle-deco">🌿</span>
-      <p class="riddle-text" id="riddle-text">Loading riddle...</p>
-    </div>
-    <div class="riddle-actions">
-      <button class="btn-hint" onclick="showHint()">💡 Show me a clue</button>
-      <button class="btn btn-coral btn-full" onclick="revealAnswer()">Reveal Answer ✨</button>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════════ CELEBRATION SCREEN ══════════════ -->
-
-<div id="celebration-screen" class="screen">
-  <div class="confetti-container" id="confetti-container"></div>
-  <div class="celeb-inner">
-    <div class="celeb-emoji">🎉</div>
-    <h2 class="celeb-title">You did it,<br><span id="celeb-name">superstar</span>!</h2>
-    <p class="celeb-subtitle" id="celeb-msg">7 riddles down. Your brain is absolutely enormous.</p>
-    <div class="celeb-actions">
-      <button class="btn btn-coral btn-full" onclick="playAgain()">Play Again 🔄</button>
-      <button class="btn btn-outline btn-full" onclick="goToActivity()">Choose Activity 🏠</button>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════════ HINT OVERLAY ══════════════ -->
-
-<div class="overlay" id="hint-overlay" onclick="closeHint(event)">
-  <div class="overlay-card">
-    <div class="overlay-title">💡 Here's your clue...</div>
-    <p class="overlay-hint" id="hint-text">Hint goes here</p>
-    <button class="btn btn-teal btn-full" onclick="closeHintBtn()">Got it!</button>
-  </div>
-</div>
-
-<!-- ══════════════ ANSWER OVERLAY ══════════════ -->
-
-<div class="overlay" id="answer-overlay" onclick="closeAnswer(event)">
-  <div class="overlay-card">
-    <div class="overlay-title" id="answer-title">The answer is...</div>
-    <p class="overlay-hint" id="answer-text" style="font-size:22px; color: var(--coral);">Answer</p>
-    <button class="btn btn-coral btn-full" id="next-btn" onclick="nextRiddle()">Next Riddle →</button>
-  </div>
-</div>
-
-<script>
-// ── GOOGLE SHEETS FETCH ──
-const SHEET_ID = '1-bqLkabofOegL2PxEv4ov0RaUwj2lCq66Xlk_5BaDVQ';
-let riddlesLoaded = false;
-
-async function fetchRiddlesFromSheet() {
-  try {
-    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
-    const res = await fetch(url);
-    const text = await res.text();
-    const json = JSON.parse(text.substring(text.indexOf('{'), text.lastIndexOf('}') + 1));
-    const rows = json.table.rows;
-    const parsed = rows.map(row => ({
-      riddle: row.c[1]?.v || '',
-      answer: row.c[2]?.v || '',
-      category: row.c[3]?.v || 'general',
-      difficulty: row.c[4]?.v || 'medium',
-      hint: row.c[5]?.v || 'Think carefully...',
-      deco: getDeco(row.c[3]?.v)
-    })).filter(r => r.riddle);
-    if (parsed.length > 0) {
-      ALL_RIDDLES.length = 0;
-      ALL_RIDDLES.push(...parsed);
-      riddlesLoaded = true;
-    }
-  } catch (e) {
-    console.log('Using fallback riddles:', e.message);
-  }
-}
-
-function getDeco(category) {
-  const map = { wordplay:'🌿', logic:'🧩', nature:'🌱', language:'📖', maths:'🔢' };
-  return map[category] || '🌿';
-}
-
-// ── DATA ──
-const ALL_RIDDLES = [
-  { riddle: "I have cities but no houses, mountains but no trees, and water but no fish. What am I?", answer: "A map", hint: "Think flat and folded", deco: "🗺️" },
-  { riddle: "What English word has three consecutive double letters?", answer: "Bookkeeper", hint: "Think about someone who manages accounts", deco: "📚" },
-  { riddle: "You go at red and stop at green. What am I?", answer: "A watermelon", hint: "Think about fruit", deco: "🍉" },
-  { riddle: "The more you take, the more you leave behind. What am I?", answer: "Footsteps", hint: "Think about walking", deco: "👣" },
-  { riddle: "What is so fragile that saying its name breaks it?", answer: "Silence", hint: "Shhh...", deco: "🤫" },
-  { riddle: "What five-letter word becomes shorter when you add two letters to it?", answer: "Short", hint: "The answer is hiding in the question", deco: "🔤" },
-  { riddle: "I'm found in Mercury, Earth, Mars and Jupiter, but not in Venus or Neptune. What am I?", answer: "The letter R", hint: "Look at the planet names carefully", deco: "🪐" },
-  { riddle: "What kind of room has no walls or corners?", answer: "A mushroom", hint: "Look for a hidden word", deco: "🍄" },
-  { riddle: "When John was 6, he hammered a nail into a tree to mark his height. Ten years later, how much higher is the nail?", answer: "Same height — trees grow from the top!", hint: "Think about how trees actually grow", deco: "🌳" },
-  { riddle: "I am higher without a head. What am I?", answer: "A pillow", hint: "Think about bedtime", deco: "😴" },
-  { riddle: "Different lights make me strange — I change into different sizes. What am I?", answer: "The pupil of an eye", hint: "Think about your face", deco: "👁️" },
-  { riddle: "What begins with E and only contains one letter?", answer: "An envelope", hint: "Think about posting something", deco: "✉️" },
-  { riddle: "I have four legs but no hair. People sit on me for hours but I go nowhere. What am I?", answer: "A chair", hint: "Think about furniture", deco: "🪑" },
-  { riddle: "What can fill a room but takes up no space?", answer: "Light", hint: "Think about sunrise", deco: "💡" },
-  { riddle: "What goes through cities and fields but never moves?", answer: "A road", hint: "Think about getting from A to B", deco: "🛣️" },
-  { riddle: "A girl fell off a 20-foot ladder but wasn't hurt. How?", answer: "She fell off the bottom rung!", hint: "How high up was she really?", deco: "🪜" },
-  { riddle: "What has a powerful horn but makes no noise?", answer: "A rhinoceros", hint: "Think about African animals", deco: "🦏" },
-  { riddle: "How can a man go 8 days without sleep?", answer: "He sleeps at night!", hint: "Read it again very carefully", deco: "🌙" },
-  { riddle: "What has a bark but no bite?", answer: "A tree", hint: "Think about the woods", deco: "🌲" },
-  { riddle: "What can you put in your pocket that would leave it empty?", answer: "A hole", hint: "Think about nothing", deco: "🕳️" },
-  { riddle: "I sometimes run but cannot walk. You follow me around. What am I?", answer: "Your nose", hint: "It's on your face!", deco: "👃" },
-  { riddle: "What has a bottom at the top?", answer: "Your legs", hint: "Think about your body", deco: "🦵" },
-  { riddle: "You hear me but can't see me, and I won't answer unless spoken to. What am I?", answer: "An echo", hint: "Try shouting in a cave", deco: "🏔️" },
-  { riddle: "What gets bigger the more you take away from it?", answer: "A hole", hint: "Think about digging", deco: "⛏️" },
-  { riddle: "What can you keep after giving it to someone?", answer: "Your word", hint: "Think about promises", deco: "🤝" },
-  { riddle: "Can you name three consecutive days without using the name of any day of the week?", answer: "Yesterday, today, and tomorrow", hint: "Think outside the calendar", deco: "📅" },
-  { riddle: "What's black and white and read all over?", answer: "A newspaper", hint: "Think about homophones", deco: "📰" },
-  { riddle: "If you've got me, you want to share me. If you share me, you haven't kept me. What am I?", answer: "A secret", hint: "Think about whispering", deco: "🤐" },
-  { riddle: "I have one eye but cannot see. I'm used every day. What am I?", answer: "A needle", hint: "Think about sewing", deco: "🧵" },
-  { riddle: "What building has the most storeys?", answer: "A library", hint: "Think about a homophone", deco: "📖" },
-  { riddle: "What goes up when rain comes down?", answer: "An umbrella", hint: "Think about rainy days", deco: "☔" },
-  { riddle: "Which letter of the alphabet has the most water?", answer: "C (the sea!)", hint: "Say it out loud", deco: "🌊" },
-  { riddle: "What comes once in a minute, twice in a moment, but never in a thousand years?", answer: "The letter M", hint: "Look at the words in the riddle", deco: "🔡" },
-  { riddle: "What word contains 26 letters but only has three syllables?", answer: "Alphabet", hint: "Think about letters themselves", deco: "🔠" },
-  { riddle: "What is always in front of you but can't be seen?", answer: "The future", hint: "Think about time", deco: "🔮" },
-  { riddle: "What has a thousand needles but doesn't sew?", answer: "A porcupine", hint: "Think about a spiky animal", deco: "🦔" },
-  { riddle: "What type of car is spelled the same forwards and backwards?", answer: "Racecar", hint: "Think about palindromes", deco: "🏎️" },
-  { riddle: "I have hands but cannot clap. What am I?", answer: "A clock", hint: "Think about telling the time", deco: "⏰" },
-  { riddle: "What invention lets you look right through a wall?", answer: "A window", hint: "Think about your house", deco: "🏠" },
-  { riddle: "What has lots of keys but can't open any doors?", answer: "A piano", hint: "Think about music", deco: "🎹" },
-  { riddle: "What is full of holes but still holds water?", answer: "A sponge", hint: "Think about bath time", deco: "🛁" },
-  { riddle: "What runs but never walks, has a mouth but never talks, has a head but never weeps?", answer: "A river", hint: "Think about geography", deco: "🏞️" },
-  { riddle: "What word, if you say it right is wrong, but if you say it wrong is right?", answer: "Wrong", hint: "Read very carefully", deco: "🤔" },
-  { riddle: "Imagine you're in a room with no doors or windows. How do you get out?", answer: "Stop imagining!", hint: "The answer is in the question", deco: "💭" },
-  { riddle: "The one who makes me can't use me. The one who buys me won't use it themselves. The one who uses me doesn't know it. What am I?", answer: "A coffin", hint: "Think about the end of a story", deco: "🌹" },
-  { riddle: "What common English verb becomes its own past tense by rearranging its letters?", answer: "Eat (becomes Ate!)", hint: "Think about mealtimes", deco: "🍽️" },
-  { riddle: "George, Helen, and Steve drink coffee. Bert, Karen, and Dave drink soda. Does Elizabeth drink coffee or soda?", answer: "Coffee — the letter E appears twice in her name!", hint: "Count a specific letter in each name", deco: "☕" },
-  { riddle: "First two letters = male, first three = female, first four = a great person, whole word = a great woman. What is it?", answer: "Heroine", hint: "He... Her... Hero...", deco: "🦸" },
-  { riddle: "What has teeth but cannot eat and combs but cannot brush?", answer: "A gear / cog", hint: "Think about machines", deco: "⚙️" },
-  { riddle: "I speak without a mouth and hear without ears. I have no body but come alive with wind. What am I?", answer: "An echo", hint: "Think about mountains and caves", deco: "🌬️" }
-];
-
-fetchRiddlesFromSheet();
-
-// ── STATE ──
-let playerName = '';
-let currentRiddles = [];
-let currentIndex = 0;
-let timerInterval = null;
-let timeLeft = 30;
-let roundsCompleted = 0;
-
-// ── SCREENS ──
-function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => {
-    s.classList.remove('active', 'entering');
-  });
-  const screen = document.getElementById(id);
-  screen.classList.add('active', 'entering');
-}
-
-// ── START ──
-document.getElementById('name-input').addEventListener('keydown', e => {
-  if (e.key === 'Enter') submitName();
-});
-
-function submitName() {
-  const val = document.getElementById('name-input').value.trim();
-  if (!val) {
-    document.getElementById('name-input').focus();
-    document.getElementById('name-input').style.borderColor = 'var(--coral)';
-    setTimeout(() => document.getElementById('name-input').style.borderColor = '', 1000);
-    return;
-  }
-  playerName = val.charAt(0).toUpperCase() + val.slice(1);
-  document.getElementById('player-name-display').textContent = playerName;
-  document.getElementById('celeb-name').textContent = playerName;
-  showScreen('activity-screen');
-}
-
-// ── ACTIVITY ──
-function startRiddles() {
-  currentRiddles = getRandomRiddles(7);
-  currentIndex = 0;
-  showScreen('riddle-screen');
-  loadRiddle();
-}
-
-function getRandomRiddles(n) {
-  const shuffled = [...ALL_RIDDLES].sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, n);
-}
-
-// ── RIDDLE LOGIC ──
-function loadRiddle() {
-  const r = currentRiddles[currentIndex];
-  document.getElementById('riddle-num').textContent = `Riddle ${currentIndex + 1} of 7`;
-  document.getElementById('riddle-text').textContent = r.riddle;
-  document.getElementById('riddle-deco').textContent = r.deco;
-  document.getElementById('hint-text').textContent = r.hint;
-  document.getElementById('answer-text').textContent = r.answer;
-
-  const isLast = currentIndex === 6;
-  document.getElementById('next-btn').textContent = isLast ? 'See Results 🎉' : 'Next Riddle →';
-
-  updateProgress();
-  startTimer();
-}
-
-function updateProgress() {
-  const container = document.getElementById('progress-dots');
-  container.innerHTML = '';
-  for (let i = 0; i < 7; i++) {
-    const dot = document.createElement('div');
-    dot.className = 'progress-dot';
-    if (i < currentIndex) dot.classList.add('done');
-    else if (i === currentIndex) dot.classList.add('current');
-    container.appendChild(dot);
-  }
-}
-
-function startTimer() {
-  clearInterval(timerInterval);
-  timeLeft = 60;
-  updateTimerDisplay();
-  timerInterval = setInterval(() => {
-    timeLeft--;
-    updateTimerDisplay();
-    if (timeLeft <= 0) {
-      clearInterval(timerInterval);
-      showAnswerOverlay("Time's up! The answer was...");
-    }
-  }, 1000);
-}
-
-function updateTimerDisplay() {
-  const el = document.getElementById('timer-display');
-  el.textContent = timeLeft;
-  el.classList.toggle('urgent', timeLeft <= 5);
-}
-
-function showHint() {
-  document.getElementById('hint-overlay').classList.add('show');
-}
-
-function closeHint(e) {
-  if (e.target === document.getElementById('hint-overlay')) closeHintBtn();
-}
-
-function closeHintBtn() {
-  document.getElementById('hint-overlay').classList.remove('show');
-}
-
-function revealAnswer() {
-  clearInterval(timerInterval);
-  showAnswerOverlay('The answer is...');
-}
-
-function showAnswerOverlay(title) {
-  document.getElementById('answer-title').textContent = title;
-  document.getElementById('answer-overlay').classList.add('show');
-}
-
-function closeAnswer(e) {
-  // Must use button to close
-}
-
-function nextRiddle() {
-  document.getElementById('answer-overlay').classList.remove('show');
-  currentIndex++;
-  if (currentIndex >= 7) {
-    endRound();
-  } else {
-    loadRiddle();
-  }
-}
-
-// ── END OF ROUND ──
-function endRound() {
-  clearInterval(timerInterval);
-  roundsCompleted++;
-  updateRoundsBadge();
-  launchConfetti();
-  const msgs = [
-    `7 riddles down. Your brain is absolutely enormous.`,
-    `That's ${roundsCompleted} round${roundsCompleted > 1 ? 's' : ''} complete. Someone's been eating their vegetables.`,
-    `A perfectly functioning brain, confirmed. Well done.`,
-    `7 out of 7 riddles survived. The riddles did not.`
-  ];
-  document.getElementById('celeb-msg').textContent = msgs[Math.min(roundsCompleted - 1, msgs.length - 1)];
-  showScreen('celebration-screen');
-}
-
-function updateRoundsBadge() {
-  const badge = document.getElementById('riddles-badge');
-  document.getElementById('rounds-count').textContent = roundsCompleted;
-  badge.classList.add('show');
-}
-
-function playAgain() {
-  showScreen('riddle-screen');
-  currentRiddles = getRandomRiddles(7);
-  currentIndex = 0;
-  loadRiddle();
-}
-
-function goToActivity() {
-  clearInterval(timerInterval);
-  showScreen('activity-screen');
-}
-
-// ── CONFETTI ──
-function launchConfetti() {
-  const container = document.getElementById('confetti-container');
-  container.innerHTML = '';
-  const colors = ['#FF7F6E','#4DBFB8','#FFE8A3','#C9C3E8','#B8E8C8','#FFDAB3'];
-  for (let i = 0; i < 60; i++) {
-    const piece = document.createElement('div');
-    piece.className = 'confetti-piece';
-    piece.style.left = Math.random() * 100 + 'vw';
-    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
-    piece.style.width = (Math.random() * 8 + 6) + 'px';
-    piece.style.height = (Math.random() * 8 + 6) + 'px';
-    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
-    piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
-    piece.style.animationDelay = (Math.random() * 1.5) + 's';
-    container.appendChild(piece);
-  }
-}
-
-// ── SNAKE ──
-function goToSnake() {
-  showScreen('snake-screen');
-  setTimeout(() => { initSnakeCanvas(); loadSnakeHiScore(); }, 50);
-}
-
-let snakeGame = null;
-
-function initSnakeCanvas() {
-  const wrap = document.querySelector('.canvas-wrap');
-  const canvas = document.getElementById('snake-canvas');
-  const size = wrap.clientWidth;
-  canvas.width = size;
-  canvas.height = size;
-}
-
-function loadSnakeHiScore() {
-  try {
-    const hi = localStorage.getItem('brainsprout_snake_hi') || 0;
-    document.getElementById('snake-hi').textContent = hi;
-  } catch(e) {}
-}
-
-function clearHighScore() {
-  try {
-    localStorage.removeItem('brainsprout_snake_hi');
-  } catch(e) {}
-  document.getElementById('snake-hi').textContent = 0;
-}
-
-function startSnakeGame() {
-  document.getElementById('snake-overlay').classList.add('hidden');
-  if (snakeGame) snakeGame.stop();
-  snakeGame = new SnakeGame();
-  snakeGame.start();
-}
-
-function snakeDir(dir) {
-  if (snakeGame) snakeGame.setDir(dir);
-}
-
-document.addEventListener('keydown', e => {
-  const map = { ArrowUp:'UP', ArrowDown:'DOWN', ArrowLeft:'LEFT', ArrowRight:'RIGHT' };
-  if (map[e.key]) { e.preventDefault(); snakeDir(map[e.key]); }
-});
-
-class SnakeGame {
-  constructor() {
-    this.canvas = document.getElementById('snake-canvas');
-    this.ctx = this.canvas.getContext('2d');
-    this.size = this.canvas.width;
-    this.cols = 20;
-    this.cell = this.size / this.cols;
-    this.reset();
-  }
-
-  reset() {
-    this.snake = [{x:10,y:10},{x:9,y:10},{x:8,y:10}];
-    this.dir = 'RIGHT';
-    this.nextDir = 'RIGHT';
-    this.food = this.randomFood();
-    this.score = 0;
-    this.running = false;
-    this.loop = null;
-    this.speed = 150;
-    document.getElementById('snake-score').textContent = 0;
-  }
-
-  randomFood() {
-    let pos;
-    do {
-      pos = { x: Math.floor(Math.random() * this.cols), y: Math.floor(Math.random() * this.cols) };
-    } while (this.snake.some(s => s.x === pos.x && s.y === pos.y));
-    return pos;
-  }
-
-  setDir(d) {
-    const opp = { UP:'DOWN', DOWN:'UP', LEFT:'RIGHT', RIGHT:'LEFT' };
-    if (d !== opp[this.dir]) this.nextDir = d;
-  }
-
-  start() { this.running = true; this.tick(); }
-  stop() { this.running = false; clearTimeout(this.loop); }
-
-  tick() {
-    if (!this.running) return;
-    this.dir = this.nextDir;
-    const head = { ...this.snake[0] };
-    if (this.dir === 'UP') head.y--;
-    if (this.dir === 'DOWN') head.y++;
-    if (this.dir === 'LEFT') head.x--;
-    if (this.dir === 'RIGHT') head.x++;
-
-    if (head.x < 0 || head.x >= this.cols || head.y < 0 || head.y >= this.cols) { this.gameOver(); return; }
-    if (this.snake.some(s => s.x === head.x && s.y === head.y)) { this.gameOver(); return; }
-
-    this.snake.unshift(head);
-    if (head.x === this.food.x && head.y === this.food.y) {
-      this.score += 10;
-      document.getElementById('snake-score').textContent = this.score;
-      this.food = this.randomFood();
-      if (this.speed > 70) this.speed -= 3;
-    } else {
-      this.snake.pop();
-    }
-    this.draw();
-    this.loop = setTimeout(() => this.tick(), this.speed);
-  }
-
-  draw() {
-    const ctx = this.ctx;
-    const c = this.cell;
-    const s = this.size;
-
-    ctx.fillStyle = '#F0FAF9';
-    ctx.fillRect(0, 0, s, s);
-
-    ctx.fillStyle = 'rgba(77,191,184,0.12)';
-    for (let x = 0; x < this.cols; x++) {
-      for (let y = 0; y < this.cols; y++) {
-        ctx.beginPath();
-        ctx.arc(x*c + c/2, y*c + c/2, 1.5, 0, Math.PI*2);
-        ctx.fill();
-      }
-    }
-
-    ctx.shadowColor = 'rgba(255,127,110,0.5)';
-    ctx.shadowBlur = 10;
-    ctx.fillStyle = '#FF7F6E';
-    ctx.beginPath();
-    ctx.arc(this.food.x*c + c/2, this.food.y*c + c/2, c/2 - 2, 0, Math.PI*2);
-    ctx.fill();
-    ctx.shadowBlur = 0;
-
-    this.snake.forEach((seg, i) => {
-      const isHead = i === 0;
-      const ratio = 1 - (i / this.snake.length) * 0.4;
-      ctx.fillStyle = isHead ? '#4DBFB8' : `rgba(77,191,184,${ratio})`;
-      ctx.shadowColor = isHead ? 'rgba(77,191,184,0.4)' : 'transparent';
-      ctx.shadowBlur = isHead ? 8 : 0;
-      const pad = isHead ? 1 : 2;
-      this.roundRect(ctx, seg.x*c+pad, seg.y*c+pad, c-pad*2, c-pad*2, isHead ? 6 : 4);
-      ctx.shadowBlur = 0;
-
-      if (isHead) {
-        const ex = this.dir==='LEFT'?-2:this.dir==='RIGHT'?2:0;
-        const ey = this.dir==='UP'?-2:this.dir==='DOWN'?2:0;
-        ctx.fillStyle='white';
-        ctx.beginPath(); ctx.arc(seg.x*c+c/2-3+ex, seg.y*c+c/2-3+ey, 3, 0, Math.PI*2); ctx.fill();
-        ctx.beginPath(); ctx.arc(seg.x*c+c/2+3+ex, seg.y*c+c/2-3+ey, 3, 0, Math.PI*2); ctx.fill();
-        ctx.fillStyle='#2D3B36';
-        ctx.beginPath(); ctx.arc(seg.x*c+c/2-3+ex, seg.y*c+c/2-3+ey, 1.5, 0, Math.PI*2); ctx.fill();
-        ctx.beginPath(); ctx.arc(seg.x*c+c/2+3+ex, seg.y*c+c/2-3+ey, 1.5, 0, Math.PI*2); ctx.fill();
+  <script src="utils.js"></script>
+  <script>
+    // ── CHECK IF NAME ALREADY SAVED ──
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = getPlayerName();
+      if (saved) {
+        // Returning user — skip straight to activities
+        window.location.href = 'activities.html';
       }
     });
-  }
 
-  roundRect(ctx, x, y, w, h, r) {
-    ctx.beginPath();
-    ctx.moveTo(x+r, y); ctx.lineTo(x+w-r, y);
-    ctx.quadraticCurveTo(x+w, y, x+w, y+r);
-    ctx.lineTo(x+w, y+h-r);
-    ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
-    ctx.lineTo(x+r, y+h);
-    ctx.quadraticCurveTo(x, y+h, x, y+h-r);
-    ctx.lineTo(x, y+r);
-    ctx.quadraticCurveTo(x, y, x+r, y);
-    ctx.closePath(); ctx.fill();
-  }
+    // Show reset button only if a name exists (i.e. user navigated back manually)
+    // This is handled by the redirect above, but guard for edge cases
+    const resetBtn = document.getElementById('reset-btn');
+    if (getPlayerName()) resetBtn.classList.add('visible');
 
-  gameOver() {
-    this.running = false;
-    let hi = 0;
-    try { hi = parseInt(localStorage.getItem('brainsprout_snake_hi') || 0); } catch(e) {}
-    const isNew = this.score > hi;
-    if (isNew) {
-      try { localStorage.setItem('brainsprout_snake_hi', this.score); } catch(e) {}
-      document.getElementById('snake-hi').textContent = this.score;
+    // ── SUBMIT NAME ──
+    document.getElementById('name-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') submitName();
+    });
+
+    function submitName() {
+      const val = document.getElementById('name-input').value.trim();
+      if (!val) {
+        const input = document.getElementById('name-input');
+        input.focus();
+        input.style.borderColor = 'var(--coral)';
+        setTimeout(() => input.style.borderColor = '', 1000);
+        return;
+      }
+      const name = val.charAt(0).toUpperCase() + val.slice(1);
+      setPlayerName(name);
+      window.location.href = 'activities.html';
     }
-    const overlay = document.getElementById('snake-overlay');
-    overlay.classList.remove('hidden');
-    document.getElementById('overlay-emoji').textContent = isNew ? '🏆' : '😵';
-    document.getElementById('overlay-title').textContent = isNew ? 'New Best!' : 'Game Over';
-    document.getElementById('overlay-sub').textContent = `You scored ${this.score}${isNew ? ' — absolute legend' : ''}`;
-    document.getElementById('overlay-btn').textContent = 'Play Again 🔄';
-  }
-}
-</script>
 
+    function handleReset() {
+      if (confirm('Reset everything and start over?')) resetPlayer();
+    }
+  </script>
 </body>
 </html>

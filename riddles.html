@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brainsprout — Riddles</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ── RIDDLE VIEW ── */
+    .page {
+      background: linear-gradient(180deg, #EEFCFB 0%, #FFF8F6 100%);
+      justify-content: flex-start;
+      padding: 0;
+      min-height: 100vh;
+    }
+
+    .hidden { display: none !important; }
+
+    .riddle-header {
+      width: 100%;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      position: relative;
+      z-index: 2;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(77,191,184,0.15);
+    }
+
+    .progress-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .progress-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--teal-light);
+      transition: background 0.3s, transform 0.3s;
+    }
+    .progress-dot.done { background: var(--teal); transform: scale(1.2); }
+    .progress-dot.current { background: var(--coral); transform: scale(1.3); box-shadow: 0 0 0 3px var(--coral-pale); }
+
+    .timer-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      border-radius: 50px;
+      padding: 8px 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    .timer-num {
+      font-family: 'Fredoka One', sans-serif;
+      font-size: 22px;
+      color: var(--coral);
+      min-width: 28px;
+      text-align: center;
+      transition: color 0.3s;
+    }
+    .timer-num.urgent { color: #FF4444; animation: pulse 0.5s ease-in-out infinite; }
+    .timer-icon { font-size: 18px; }
+
+    .riddle-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 24px 24px;
+      width: 100%;
+      max-width: 560px;
+      margin: 0 auto;
+      gap: 24px;
+    }
+
+    .riddle-num {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-light);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .riddle-card {
+      background: white;
+      border-radius: 28px;
+      padding: 36px 32px;
+      width: 100%;
+      box-shadow: 0 12px 48px rgba(77,191,184,0.12), 0 2px 8px rgba(0,0,0,0.04);
+      text-align: center;
+      border: 2px solid rgba(77,191,184,0.1);
+    }
+
+    .riddle-deco {
+      font-size: 36px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .riddle-text {
+      font-family: 'Fredoka One', sans-serif;
+      font-size: 22px;
+      color: var(--text-dark);
+      line-height: 1.4;
+      letter-spacing: -0.3px;
+    }
+
+    .riddle-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+    }
+
+    /* ── CELEBRATION VIEW ── */
+    #celebration-view {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #FFF8F6 0%, #EEFCFB 60%, #F0F4FF 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+      position: relative;
+    }
+
+    .celeb-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 480px;
+      width: 100%;
+      gap: 8px;
+    }
+
+    .celeb-emoji { font-size: 72px; margin-bottom: 8px; animation: bounce 0.6s ease-in-out; }
+
+    .celeb-title {
+      font-family: 'Fredoka One', sans-serif;
+      font-size: 40px;
+      color: var(--coral);
+      text-align: center;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .celeb-subtitle {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-mid);
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .celeb-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+    }
+
+    /* Reset button */
+    .reset-btn {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      background: white;
+      border: 2px solid #E0ECEB;
+      border-radius: 50px;
+      padding: 8px 14px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text-light);
+      cursor: pointer;
+      z-index: 10;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .reset-btn:hover { color: var(--coral); border-color: var(--coral-light); background: var(--coral-pale); }
+
+    @media (max-width: 400px) {
+      .riddle-text { font-size: 18px; }
+      .celeb-title { font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── RIDDLE VIEW ── -->
+  <div id="riddle-view">
+    <div class="riddle-header">
+      <a href="activities.html" class="btn btn-outline" style="padding:8px 18px;font-size:13px;">← Back</a>
+      <div class="progress-wrap" id="progress-dots"></div>
+      <div class="timer-wrap">
+        <span class="timer-icon">⏱️</span>
+        <span class="timer-num" id="timer-display">60</span>
+      </div>
+    </div>
+
+    <div class="riddle-body">
+      <div class="riddle-num" id="riddle-num">Riddle 1 of 7</div>
+      <div class="riddle-card">
+        <span class="riddle-deco" id="riddle-deco">🌿</span>
+        <p class="riddle-text" id="riddle-text">Loading riddle...</p>
+      </div>
+      <div class="riddle-actions">
+        <button class="btn-hint" onclick="showHint()">💡 Show me a clue</button>
+        <button class="btn btn-coral btn-full" onclick="revealAnswer()">Reveal Answer ✨</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CELEBRATION VIEW ── -->
+  <div id="celebration-view" class="hidden">
+    <div class="confetti-container" id="confetti-container"></div>
+    <div class="celeb-inner">
+      <div class="celeb-emoji">🎉</div>
+      <h2 class="celeb-title">You did it,<br><span id="celeb-name">superstar</span>!</h2>
+      <p class="celeb-subtitle" id="celeb-msg">7 riddles down. Your brain is absolutely enormous.</p>
+      <div class="celeb-actions">
+        <button class="btn btn-coral btn-full" onclick="playAgain()">Play Again 🔄</button>
+        <a href="activities.html" class="btn btn-outline btn-full">Choose Activity 🏠</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── HINT OVERLAY ── -->
+  <div class="overlay" id="hint-overlay" onclick="closeHint(event)">
+    <div class="overlay-card">
+      <div class="overlay-title">💡 Here's your clue...</div>
+      <p class="overlay-hint" id="hint-text">Hint goes here</p>
+      <button class="btn btn-teal btn-full" onclick="closeHintBtn()">Got it!</button>
+    </div>
+  </div>
+
+  <!-- ── ANSWER OVERLAY ── -->
+  <div class="overlay" id="answer-overlay">
+    <div class="overlay-card">
+      <div class="overlay-title" id="answer-title">The answer is...</div>
+      <p class="overlay-hint" id="answer-text" style="font-size:22px; color: var(--coral);"></p>
+      <button class="btn btn-coral btn-full" id="next-btn" onclick="nextRiddle()">Next Riddle →</button>
+    </div>
+  </div>
+
+  <script src="utils.js"></script>
+  <script src="riddles.js"></script>
+</body>
+</html>
